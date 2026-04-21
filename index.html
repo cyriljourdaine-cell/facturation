@@ -138,7 +138,7 @@
   <header>
     <div class="header-top">
       <div style="display:flex;align-items:center;gap:10px;">
-        <div class="logo">factu<span>.</span>app</div>
+        <div class="logo">factu<span>.</span>app <span style="font-size:10px;font-weight:400;color:var(--text3);margin-left:4px;" id="app-version">v1.0.0</span></div>
         <div class="sync-status">
           <div class="sync-dot" id="sync-dot"></div>
           <span id="sync-label">Non connecté</span>
@@ -634,7 +634,25 @@ document.getElementById('f-date').valueAsDate = new Date();
 document.getElementById('year-display').textContent = currentYear;
 loadConfig(); loadLocal(); renderAll();
 if (apiUrl && apiSecret) pullFromNas();
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js").then(reg => {
+    reg.addEventListener("updatefound", () => {
+      const newWorker = reg.installing;
+      newWorker.addEventListener("statechange", () => {
+        if (newWorker.state === "activated") {
+          console.log("Nouvelle version activée, rechargement...");
+          window.location.reload();
+        }
+      });
+    });
+    setInterval(() => reg.update(), 30000);
+  });
+  navigator.serviceWorker.addEventListener("message", e => {
+    if (e.data && e.data.type === "NEW_VERSION") {
+      document.getElementById("app-version").textContent = "v" + e.data.version;
+    }
+  });
+}
 </script>
 </body>
 </html>

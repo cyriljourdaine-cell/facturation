@@ -201,7 +201,7 @@
   <header>
     <div class="header-top">
       <div style="display:flex;align-items:center;gap:10px;">
-        <div class="logo">factu<span class="accent">.</span>app <span class="ver" id="app-version">v1.4.2</span></div>
+        <div class="logo">factu<span class="accent">.</span>app <span class="ver" id="app-version">v1.4.3</span></div>
         <div class="sync-status">
           <div class="sync-dot" id="sync-dot"></div>
           <span id="sync-label">Non connecté</span>
@@ -866,19 +866,45 @@ function updateDashboard(){
   document.getElementById('m-net-valide').textContent=fmt(netV);
   document.getElementById('m-net-opt').textContent=fmt(netOpt);
 
-  const dataV=Array(12).fill(0),dataO=Array(12).fill(0),dataP=Array(12).fill(0),dataST=Array(12).fill(0);
-  yr.forEach(e=>{
-    const m=new Date(e.date).getMonth();
-    if(e.status==='valide')dataV[m]+=getVal(e);
-    else if(e.status==='option')dataO[m]+=getVal(e);
-    else if(e.status==='paye')dataP[m]+=getVal(e);
-    dataST[m]+=getSubVal(e);
-  });
+  // Build chart labels and data based on period
+  let chartLabels, dataV, dataO, dataP, dataST;
+  if(periodMode==='custom'&&periodStart&&periodEnd){
+    // Generate month-by-month labels for the custom period
+    chartLabels=[]; dataV=[]; dataO=[]; dataP=[]; dataST=[];
+    let cur=new Date(periodStart.getFullYear(),periodStart.getMonth(),1);
+    const endMonth=new Date(periodEnd.getFullYear(),periodEnd.getMonth(),1);
+    while(cur<=endMonth){
+      const label=MONTHS[cur.getMonth()]+(cur.getFullYear()!==periodStart.getFullYear()&&cur.getMonth()===0?'\n'+cur.getFullYear():'');
+      chartLabels.push(MONTHS[cur.getMonth()]+' '+String(cur.getFullYear()).slice(2));
+      dataV.push(0);dataO.push(0);dataP.push(0);dataST.push(0);
+      cur.setMonth(cur.getMonth()+1);
+    }
+    yr.forEach(e=>{
+      const d=new Date(e.date+'T12:00:00');
+      const idx=(d.getFullYear()-periodStart.getFullYear())*12+(d.getMonth()-periodStart.getMonth());
+      if(idx>=0&&idx<chartLabels.length){
+        if(e.status==='valide')dataV[idx]+=getVal(e);
+        else if(e.status==='option')dataO[idx]+=getVal(e);
+        else if(e.status==='paye')dataP[idx]+=getVal(e);
+        dataST[idx]+=getSubVal(e);
+      }
+    });
+  } else {
+    chartLabels=MONTHS;
+    dataV=Array(12).fill(0);dataO=Array(12).fill(0);dataP=Array(12).fill(0);dataST=Array(12).fill(0);
+    yr.forEach(e=>{
+      const m=new Date(e.date).getMonth();
+      if(e.status==='valide')dataV[m]+=getVal(e);
+      else if(e.status==='option')dataO[m]+=getVal(e);
+      else if(e.status==='paye')dataP[m]+=getVal(e);
+      dataST[m]+=getSubVal(e);
+    });
+  }
   const dataNetV=dataV.map((v,i)=>v-dataST[i]);
 
   if(mainChart)mainChart.destroy();
   mainChart=new Chart(document.getElementById('mainChart'),{type:'bar',
-    data:{labels:MONTHS,datasets:[
+    data:{labels:chartLabels,datasets:[
       {type:'bar',label:'Validé',data:dataV,backgroundColor:'#3b82f6',borderRadius:3,borderSkipped:false,order:2},
       {type:'bar',label:'Option',data:dataO,backgroundColor:'#f59e0b',borderRadius:3,borderSkipped:false,order:2},
       {type:'bar',label:'Payé',data:dataP,backgroundColor:'#059669',borderRadius:3,borderSkipped:false,order:2},

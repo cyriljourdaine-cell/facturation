@@ -17,7 +17,9 @@
       --text: #f1f5f9; --text2: #94a3b8; --text3: #64748b;
       --blue: #3b82f6; --blue-light: #93c5fd; --blue-bg: rgba(59,130,246,0.12);
       --amber: #f59e0b; --amber-light: #fcd34d; --amber-bg: rgba(245,158,11,0.12);
-      --green: #10b981;
+      --green: #10b981; --green-light: #6ee7b7; --green-bg: rgba(16,185,129,0.12);
+      --red: #ef4444; --red-light: #fca5a5; --red-bg: rgba(239,68,68,0.1);
+      --purple: #a855f7; --purple-light: #d8b4fe; --purple-bg: rgba(168,85,247,0.12);
       --radius: 10px;
     }
     html, body { height: 100%; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; }
@@ -30,7 +32,7 @@
     .sync-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); }
     .sync-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text3); flex-shrink: 0; }
     .sync-dot.ok { background: var(--green); }
-    .sync-dot.err { background: #ef4444; }
+    .sync-dot.err { background: var(--red); }
     .sync-dot.syncing { background: var(--amber); animation: pulse 1s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
     .header-controls { display: flex; align-items: center; gap: 8px; }
@@ -41,27 +43,28 @@
     .mode-pill button { padding: 4px 12px; border: none; border-radius: 16px; font-size: 12px; font-weight: 600; cursor: pointer; background: transparent; color: var(--text2); }
     .mode-pill button.active { background: var(--blue); color: #fff; }
 
-    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 14px 20px; }
-    .metric { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; border: 0.5px solid var(--border); }
-    .metric-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-    .metric-value { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
+    .metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 12px 20px; }
+    .metric { background: var(--bg2); border-radius: var(--radius); padding: 10px 12px; border: 0.5px solid var(--border); }
+    .metric-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+    .metric-value { font-size: 16px; font-weight: 700; letter-spacing: -0.5px; }
     .metric-value.blue { color: var(--blue-light); }
     .metric-value.amber { color: var(--amber-light); }
-    .metric-value.green { color: #6ee7b7; }
+    .metric-value.red { color: var(--red-light); }
+    .metric-value.green { color: var(--green-light); }
 
-    .chart-section { padding: 0 20px 10px; }
-    .chart-legend { display: flex; gap: 14px; margin-bottom: 8px; }
-    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text2); }
+    .chart-section { padding: 0 20px 8px; }
+    .chart-legend { display: flex; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--text2); }
     .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
-    .chart-wrap { position: relative; height: 180px; }
+    .chart-wrap { position: relative; height: 160px; }
 
     .tabs { display: flex; border-top: 0.5px solid var(--border); background: var(--bg); }
-    .tab { flex: 1; padding: 12px 8px 10px; background: none; border: none; color: var(--text3); cursor: pointer; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .tab { flex: 1; padding: 10px 8px 8px; background: none; border: none; color: var(--text3); cursor: pointer; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3px; }
     .tab svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; }
     .tab.active { color: var(--blue); }
 
     .panels { flex: 1; overflow: hidden; }
-    .panel { display: none; height: 100%; overflow-y: auto; padding: 16px 20px; }
+    .panel { display: none; height: 100%; overflow-y: auto; padding: 14px 20px; }
     .panel.active { display: block; }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
@@ -84,7 +87,8 @@
 
     .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
     .list-count { font-size: 13px; color: var(--text3); }
-    .entry-card { background: var(--bg2); border-radius: var(--radius); border: 0.5px solid var(--border); padding: 14px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 12px; }
+    .entry-card { background: var(--bg2); border-radius: var(--radius); border: 0.5px solid var(--border); padding: 12px 14px; margin-bottom: 8px; }
+    .entry-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
     .entry-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
     .entry-icon.signed { background: var(--blue-bg); color: var(--blue-light); }
     .entry-icon.option { background: var(--amber-bg); color: var(--amber-light); }
@@ -93,11 +97,18 @@
     .entry-meta { font-size: 12px; color: var(--text3); margin-top: 2px; }
     .entry-right { text-align: right; flex-shrink: 0; }
     .entry-amount { font-weight: 700; font-size: 16px; }
+    .entry-sub { font-size: 11px; color: var(--red-light); margin-top: 2px; }
+    .entry-net { font-size: 11px; color: var(--green-light); margin-top: 1px; }
     .entry-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-top: 4px; }
     .badge-signed { background: var(--blue-bg); color: var(--blue-light); }
     .badge-option { background: var(--amber-bg); color: var(--amber-light); }
-    .btn-del { background: none; border: none; color: var(--text3); cursor: pointer; padding: 4px; font-size: 16px; border-radius: 6px; }
-    .btn-del:hover { color: #f87171; background: rgba(248,113,113,0.1); }
+    .entry-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; padding-top: 10px; border-top: 0.5px solid var(--border); }
+    .btn-paid { height: 32px; background: var(--green-bg); border: 0.5px solid rgba(16,185,129,0.3); color: var(--green-light); border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    .btn-paid:hover { background: rgba(16,185,129,0.2); }
+    .btn-edit { height: 32px; background: var(--blue-bg); border: 0.5px solid rgba(59,130,246,0.3); color: var(--blue-light); border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    .btn-edit:hover { background: rgba(59,130,246,0.2); }
+    .btn-del { height: 32px; background: var(--red-bg); border: 0.5px solid rgba(239,68,68,0.2); color: var(--red-light); border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    .btn-del:hover { background: rgba(239,68,68,0.18); }
     .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text3); }
     .empty-state p { margin-top: 8px; font-size: 14px; }
 
@@ -110,10 +121,16 @@
     .btn-secondary { width: 100%; height: 44px; background: transparent; border: 0.5px solid var(--border2); color: var(--text2); border-radius: var(--radius); font-size: 14px; cursor: pointer; margin-top: 8px; }
     .conn-status { padding: 10px 12px; background: var(--bg3); border-radius: var(--radius); font-size: 13px; color: var(--text2); margin-top: 10px; display: none; }
 
-    @media (max-width: 400px) {
-      .metrics { grid-template-columns: 1fr 1fr; }
-      .metrics .metric:last-child { grid-column: 1 / -1; }
-    }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 100; display: flex; align-items: flex-end; justify-content: center; }
+    .modal-backdrop.hidden { display: none; }
+    .modal { background: var(--bg2); border-radius: 20px 20px 0 0; padding: 20px 20px 32px; width: 100%; max-width: 680px; border: 0.5px solid var(--border2); max-height: 90vh; overflow-y: auto; }
+    .modal-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .modal-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    .modal-btns button { height: 46px; border-radius: var(--radius); font-size: 15px; font-weight: 600; cursor: pointer; border: none; }
+    .btn-cancel { background: var(--bg3); color: var(--text2); }
+    .btn-confirm { background: var(--blue); color: #fff; }
+
+    @media (max-width: 400px) { .metrics { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
@@ -144,16 +161,71 @@
   <div class="metrics">
     <div class="metric"><div class="metric-label">Signés</div><div class="metric-value blue" id="m-signed">0 €</div></div>
     <div class="metric"><div class="metric-label">Options</div><div class="metric-value amber" id="m-option">0 €</div></div>
-    <div class="metric"><div class="metric-label">Total</div><div class="metric-value green" id="m-total">0 €</div></div>
+    <div class="metric"><div class="metric-label">Sous-traitants</div><div class="metric-value red" id="m-sub">0 €</div></div>
+    <div class="metric"><div class="metric-label">Net poche</div><div class="metric-value green" id="m-net">0 €</div></div>
   </div>
 
   <div class="chart-section">
     <div class="chart-legend">
       <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div>Signés</div>
       <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>Options</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div>Sous-traitants</div>
     </div>
     <div class="chart-wrap">
       <canvas id="mainChart" role="img" aria-label="Graphique mensuel des entrées d'argent">Données mensuelles.</canvas>
+    </div>
+  </div>
+
+  <!-- Modal édition -->
+  <div class="modal-backdrop hidden" id="modal-backdrop" onclick="closeModalOutside(event)">
+    <div class="modal" id="modal-box">
+      <div class="modal-title">Modifier l'entrée</div>
+      <div class="form-row">
+        <div class="form-group full">
+          <label>Client</label>
+          <input type="text" id="e-client" placeholder="Nom du client"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date de prestation</label>
+          <input type="date" id="e-date"/>
+        </div>
+        <div class="form-group">
+          <label>Montant HT (€)</label>
+          <input type="number" id="e-ht" step="0.01" min="0" inputmode="decimal"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>TVA</label>
+          <select id="e-tva">
+            <option value="20">20 % — standard</option>
+            <option value="10">10 % — réduit</option>
+            <option value="5.5">5,5 % — réduit</option>
+            <option value="2.1">2,1 % — super réduit</option>
+            <option value="0">0 % — exonéré</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Sous-traitant HT (€)</label>
+          <input type="number" id="e-sub" step="0.01" min="0" placeholder="0.00" inputmode="decimal"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full">
+          <label>Description</label>
+          <input type="text" id="e-desc" placeholder="Optionnel"/>
+        </div>
+      </div>
+      <div class="status-row">
+        <button class="status-btn sel-signed" id="e-btn-signed" onclick="selectEditStatus('signed')">✓ Contrat signé</button>
+        <button class="status-btn" id="e-btn-option" onclick="selectEditStatus('option')">◇ En option</button>
+      </div>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeModal()">Annuler</button>
+        <button class="btn-confirm" onclick="saveEdit()">Enregistrer</button>
+      </div>
     </div>
   </div>
 
@@ -187,6 +259,12 @@
           </select>
         </div>
         <div class="form-group">
+          <label>Sous-traitant HT (€)</label>
+          <input type="number" id="f-sub" placeholder="0.00" step="0.01" min="0" inputmode="decimal"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full">
           <label>Description</label>
           <input type="text" id="f-desc" placeholder="Optionnel"/>
         </div>
@@ -214,10 +292,10 @@
       <div class="settings-section">
         <div class="settings-title">Connexion NAS Synology</div>
         <div class="settings-card">
-          <p>Entre l'adresse de ton NAS et le mot de passe pour activer la synchronisation automatique entre tous tes appareils.</p>
+          <p>Entre l'adresse de ton NAS et le mot de passe pour activer la synchronisation automatique.</p>
           <div class="field-row">
             <label>URL de l'API</label>
-            <input type="url" id="s-url" placeholder="http://cyril.synology.me:3001"/>
+            <input type="url" id="s-url" placeholder="https://jourdainecyril.synology.me:3002"/>
           </div>
           <div class="field-row">
             <label>Mot de passe secret</label>
@@ -230,7 +308,7 @@
       <div class="settings-section">
         <div class="settings-title">Synchronisation</div>
         <div class="settings-card">
-          <p>Les données sont synchronisées automatiquement à chaque ajout ou suppression. Tu peux aussi forcer une synchronisation manuelle.</p>
+          <p>Les données sont synchronisées automatiquement à chaque ajout, modification ou suppression.</p>
           <button class="btn-save" style="background:var(--bg3);border:0.5px solid var(--border2);color:var(--text2);" onclick="pullFromNas()">↻ Forcer une synchronisation</button>
           <button class="btn-secondary" onclick="if(confirm('Effacer toutes les données locales ?')){entries=[];saveLocal();renderAll();}">🗑 Effacer les données locales</button>
         </div>
@@ -260,19 +338,20 @@ let entries = [];
 let mode = 'HT';
 let currentYear = new Date().getFullYear();
 let selectedStatus = 'signed';
+let editStatus = 'signed';
+let editId = null;
 let chart = null;
 let apiUrl = '';
 let apiSecret = '';
 
 const MONTHS = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
-const KEY = 'facturation_v3';
+const KEY = 'facturation_v4';
 const CONF_KEY = 'facturation_conf';
 
 function loadConfig() {
   try {
     const c = JSON.parse(localStorage.getItem(CONF_KEY) || '{}');
-    apiUrl = c.url || '';
-    apiSecret = c.secret || '';
+    apiUrl = c.url || ''; apiSecret = c.secret || '';
     if (apiUrl) document.getElementById('s-url').value = apiUrl;
     if (apiSecret) document.getElementById('s-secret').value = apiSecret;
   } catch(e) {}
@@ -285,25 +364,21 @@ function saveConfig() {
   testConnection();
 }
 
-function headers() {
-  return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiSecret };
-}
+function hdrs() { return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiSecret }; }
 
 async function testConnection() {
   const el = document.getElementById('conn-status');
-  el.style.display = 'block';
-  el.style.color = 'var(--text2)';
-  el.textContent = 'Test en cours...';
+  el.style.display = 'block'; el.style.color = 'var(--text2)'; el.textContent = 'Test en cours...';
   setSyncStatus('syncing', 'Connexion...');
   try {
-    const r = await fetch(apiUrl + '/health', { headers: headers() });
+    const r = await fetch(apiUrl + '/health', { headers: hdrs() });
     const d = await r.json();
     if (r.ok) {
       el.textContent = '✓ Connecté — ' + d.entries + ' entrée(s) sur le NAS';
-      el.style.color = '#6ee7b7';
+      el.style.color = 'var(--green-light)';
       setSyncStatus('ok', 'Synchronisé');
       await pullFromNas();
-    } else { throw new Error(); }
+    } else throw new Error();
   } catch(e) {
     el.textContent = '✗ Connexion impossible — vérifie l\'URL et le mot de passe';
     el.style.color = '#f87171';
@@ -315,33 +390,37 @@ async function pullFromNas() {
   if (!apiUrl || !apiSecret) return;
   setSyncStatus('syncing', 'Synchronisation...');
   try {
-    const r = await fetch(apiUrl + '/entries', { headers: headers() });
+    const r = await fetch(apiUrl + '/entries', { headers: hdrs() });
     if (!r.ok) throw new Error();
     entries = await r.json();
-    saveLocal();
-    renderAll();
+    saveLocal(); renderAll();
     setSyncStatus('ok', 'Synchronisé');
-  } catch(e) {
-    setSyncStatus('err', 'Hors ligne');
-  }
+  } catch(e) { setSyncStatus('err', 'Hors ligne'); }
 }
 
 async function pushEntry(entry) {
   if (!apiUrl || !apiSecret) return;
   try {
-    await fetch(apiUrl + '/entries', { method: 'POST', headers: headers(), body: JSON.stringify(entry) });
+    await fetch(apiUrl + '/entries', { method: 'POST', headers: hdrs(), body: JSON.stringify(entry) });
+    setSyncStatus('ok', 'Synchronisé');
+  } catch(e) { setSyncStatus('err', 'Hors ligne — sauvegardé localement'); }
+}
+
+async function updateEntryOnNas(entry) {
+  if (!apiUrl || !apiSecret) return;
+  try {
+    await fetch(apiUrl + '/entries/' + entry.id, { method: 'PUT', headers: hdrs(), body: JSON.stringify(entry) });
     setSyncStatus('ok', 'Synchronisé');
   } catch(e) { setSyncStatus('err', 'Hors ligne — sauvegardé localement'); }
 }
 
 async function deleteEntryFromNas(id) {
   if (!apiUrl || !apiSecret) return;
-  try { await fetch(apiUrl + '/entries/' + id, { method: 'DELETE', headers: headers() }); } catch(e) {}
+  try { await fetch(apiUrl + '/entries/' + id, { method: 'DELETE', headers: hdrs() }); } catch(e) {}
 }
 
 function saveLocal() { try { localStorage.setItem(KEY, JSON.stringify(entries)); } catch(e) {} }
 function loadLocal() { try { const d = localStorage.getItem(KEY); if (d) entries = JSON.parse(d); } catch(e) {} }
-
 function setSyncStatus(state, label) {
   document.getElementById('sync-dot').className = 'sync-dot ' + state;
   document.getElementById('sync-label').textContent = label;
@@ -373,28 +452,86 @@ function selectStatus(s) {
   document.getElementById('btn-option').className = 'status-btn' + (s==='option' ? ' sel-option' : '');
 }
 
+function selectEditStatus(s) {
+  editStatus = s;
+  document.getElementById('e-btn-signed').className = 'status-btn' + (s==='signed' ? ' sel-signed' : '');
+  document.getElementById('e-btn-option').className = 'status-btn' + (s==='option' ? ' sel-option' : '');
+}
+
+// ── Modal ──
+function openEditModal(id) {
+  const e = entries.find(x => x.id === id);
+  if (!e) return;
+  editId = id;
+  document.getElementById('e-client').value = e.client;
+  document.getElementById('e-date').value = e.date;
+  document.getElementById('e-ht').value = e.ht;
+  document.getElementById('e-tva').value = e.tva;
+  document.getElementById('e-sub').value = e.sub || 0;
+  document.getElementById('e-desc').value = e.desc || '';
+  selectEditStatus(e.status);
+  document.getElementById('modal-backdrop').classList.remove('hidden');
+}
+
+function closeModal() { document.getElementById('modal-backdrop').classList.add('hidden'); editId = null; }
+function closeModalOutside(ev) { if (ev.target === document.getElementById('modal-backdrop')) closeModal(); }
+
+async function saveEdit() {
+  if (!editId) return;
+  const ht = parseFloat(document.getElementById('e-ht').value);
+  const tva = parseFloat(document.getElementById('e-tva').value);
+  const sub = parseFloat(document.getElementById('e-sub').value) || 0;
+  const idx = entries.findIndex(x => x.id === editId);
+  if (idx === -1) return;
+  entries[idx] = {
+    ...entries[idx],
+    client: document.getElementById('e-client').value.trim(),
+    date: document.getElementById('e-date').value,
+    ht: Math.round(ht*100)/100,
+    tva,
+    ttc: Math.round(ht*(1+tva/100)*100)/100,
+    sub: Math.round(sub*100)/100,
+    subTtc: Math.round(sub*(1+tva/100)*100)/100,
+    desc: document.getElementById('e-desc').value.trim(),
+    status: editStatus
+  };
+  saveLocal(); renderAll();
+  await updateEntryOnNas(entries[idx]);
+  closeModal();
+}
+
+// ── Add ──
 async function addEntry() {
   const client = document.getElementById('f-client').value.trim();
   const date = document.getElementById('f-date').value;
   const ht = parseFloat(document.getElementById('f-ht').value);
   const tva = parseFloat(document.getElementById('f-tva').value);
+  const sub = parseFloat(document.getElementById('f-sub').value) || 0;
   const desc = document.getElementById('f-desc').value.trim();
   const msg = document.getElementById('form-msg');
   if (!client || !date || isNaN(ht) || ht <= 0) {
     msg.className = 'msg err'; msg.textContent = 'Renseigne le client, la date et le montant.'; return;
   }
-  const entry = { id: Date.now(), client, date, ht: Math.round(ht*100)/100, tva, ttc: Math.round(ht*(1+tva/100)*100)/100, status: selectedStatus, desc };
+  const entry = {
+    id: Date.now(), client, date,
+    ht: Math.round(ht*100)/100, tva,
+    ttc: Math.round(ht*(1+tva/100)*100)/100,
+    sub: Math.round(sub*100)/100,
+    subTtc: Math.round(sub*(1+tva/100)*100)/100,
+    status: selectedStatus, desc
+  };
   entries.push(entry);
-  saveLocal();
-  renderAll();
+  saveLocal(); renderAll();
   await pushEntry(entry);
   document.getElementById('f-client').value = '';
   document.getElementById('f-ht').value = '';
+  document.getElementById('f-sub').value = '';
   document.getElementById('f-desc').value = '';
   msg.className = 'msg ok'; msg.textContent = '✓ Entrée ajoutée et synchronisée !';
   setTimeout(() => { msg.textContent = ''; }, 2500);
 }
 
+// ── Delete ──
 async function deleteEntry(id) {
   if (!confirm('Supprimer cette entrée ?')) return;
   entries = entries.filter(e => e.id !== id);
@@ -402,59 +539,100 @@ async function deleteEntry(id) {
   await deleteEntryFromNas(id);
 }
 
+// ── Paid ──
+async function markPaid(id) {
+  if (!confirm('Marquer comme payé et supprimer cette entrée ?')) return;
+  entries = entries.filter(e => e.id !== id);
+  saveLocal(); renderAll();
+  await deleteEntryFromNas(id);
+}
+
+// ── Helpers ──
 function fmt(v) { return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(v); }
 function getVal(e) { return mode === 'HT' ? e.ht : e.ttc; }
+function getSubVal(e) { return mode === 'HT' ? (e.sub||0) : (e.subTtc||0); }
 function initials(n) { return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
 
+// ── Dashboard ──
 function updateDashboard() {
   const yr = entries.filter(e => new Date(e.date).getFullYear() === currentYear);
-  const sumS = yr.filter(e=>e.status==='signed').reduce((a,e)=>a+getVal(e),0);
-  const sumO = yr.filter(e=>e.status==='option').reduce((a,e)=>a+getVal(e),0);
+  const signed = yr.filter(e=>e.status==='signed');
+  const option = yr.filter(e=>e.status==='option');
+  const sumS = signed.reduce((a,e)=>a+getVal(e),0);
+  const sumO = option.reduce((a,e)=>a+getVal(e),0);
+  const sumSub = yr.reduce((a,e)=>a+getSubVal(e),0);
+  const net = sumS + sumO - sumSub;
   document.getElementById('m-signed').textContent = fmt(sumS);
   document.getElementById('m-option').textContent = fmt(sumO);
-  document.getElementById('m-total').textContent = fmt(sumS+sumO);
-  const dataS = Array(12).fill(0), dataO = Array(12).fill(0);
-  yr.forEach(e => { const m = new Date(e.date).getMonth(); (e.status==='signed'?dataS:dataO)[m] += getVal(e); });
+  document.getElementById('m-sub').textContent = fmt(sumSub);
+  document.getElementById('m-net').textContent = fmt(net);
+
+  const dataS=Array(12).fill(0), dataO=Array(12).fill(0), dataSub=Array(12).fill(0);
+  yr.forEach(e => {
+    const m = new Date(e.date).getMonth();
+    if (e.status==='signed') dataS[m]+=getVal(e);
+    else dataO[m]+=getVal(e);
+    dataSub[m]+=getSubVal(e);
+  });
+
   if (chart) chart.destroy();
   chart = new Chart(document.getElementById('mainChart'), {
     type: 'bar',
     data: { labels: MONTHS, datasets: [
-      { label:'Signés', data:dataS, backgroundColor:'#3b82f6', borderRadius:4, borderSkipped:false },
-      { label:'Options', data:dataO, backgroundColor:'#f59e0b', borderRadius:4, borderSkipped:false }
+      { label:'Signés', data:dataS, backgroundColor:'#3b82f6', borderRadius:3, borderSkipped:false },
+      { label:'Options', data:dataO, backgroundColor:'#f59e0b', borderRadius:3, borderSkipped:false },
+      { label:'Sous-traitants', data:dataSub, backgroundColor:'#ef4444', borderRadius:3, borderSkipped:false }
     ]},
     options: { responsive:true, maintainAspectRatio:false,
       plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>' '+fmt(ctx.raw)}} },
-      scales:{ x:{grid:{display:false},ticks:{color:'#64748b',font:{size:10}}}, y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#64748b',callback:v=>fmt(v),font:{size:10}}} }
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#64748b',font:{size:10}}},
+        y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#64748b',callback:v=>fmt(v),font:{size:10}}}
+      }
     }
   });
 }
 
+// ── List ──
 function renderList() {
   const el = document.getElementById('entries-list');
   document.getElementById('list-count').textContent = entries.length + ' entrée(s)';
-  if (!entries.length) { el.innerHTML = '<div class="empty-state"><div style="font-size:2rem;">📋</div><p>Aucune entrée.<br>Ajoute ton premier contrat.</p></div>'; return; }
-  el.innerHTML = [...entries].sort((a,b)=>new Date(b.date)-new Date(a.date)).map(e=>`
+  if (!entries.length) {
+    el.innerHTML = '<div class="empty-state"><div style="font-size:2rem;">📋</div><p>Aucune entrée.<br>Ajoute ton premier contrat.</p></div>';
+    return;
+  }
+  el.innerHTML = [...entries].sort((a,b)=>new Date(b.date)-new Date(a.date)).map(e => {
+    const val = getVal(e);
+    const subVal = getSubVal(e);
+    const net = val - subVal;
+    return `
     <div class="entry-card">
-      <div class="entry-icon ${e.status}">${initials(e.client)}</div>
-      <div class="entry-body">
-        <div class="entry-client">${e.client}</div>
-        <div class="entry-meta">${new Date(e.date).toLocaleDateString('fr-FR')}${e.desc?' · '+e.desc:''}</div>
+      <div class="entry-top">
+        <div class="entry-icon ${e.status}">${initials(e.client)}</div>
+        <div class="entry-body">
+          <div class="entry-client">${e.client}</div>
+          <div class="entry-meta">${new Date(e.date).toLocaleDateString('fr-FR')}${e.desc?' · '+e.desc:''}</div>
+        </div>
+        <div class="entry-right">
+          <div class="entry-amount">${fmt(val)}</div>
+          ${subVal > 0 ? `<div class="entry-sub">- ${fmt(subVal)} ST</div><div class="entry-net">= ${fmt(net)}</div>` : ''}
+          <div class="entry-badge badge-${e.status}">${e.status==='signed'?'Signé':'Option'}</div>
+        </div>
       </div>
-      <div class="entry-right">
-        <div class="entry-amount">${fmt(getVal(e))}</div>
-        <div class="entry-badge badge-${e.status}">${e.status==='signed'?'Signé':'Option'}</div>
+      <div class="entry-actions">
+        <button class="btn-paid" onclick="markPaid(${e.id})">✓ Payé</button>
+        <button class="btn-edit" onclick="openEditModal(${e.id})">✏️ Modifier</button>
+        <button class="btn-del" onclick="deleteEntry(${e.id})">🗑 Supprimer</button>
       </div>
-      <button class="btn-del" onclick="deleteEntry(${e.id})">✕</button>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 function renderAll() { updateDashboard(); renderList(); }
 
 document.getElementById('f-date').valueAsDate = new Date();
 document.getElementById('year-display').textContent = currentYear;
-loadConfig();
-loadLocal();
-renderAll();
+loadConfig(); loadLocal(); renderAll();
 if (apiUrl && apiSecret) pullFromNas();
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
 </script>

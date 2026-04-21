@@ -19,36 +19,36 @@
       --amber: #f59e0b; --amber-light: #fcd34d; --amber-bg: rgba(245,158,11,0.12);
       --green: #10b981; --green-light: #6ee7b7; --green-bg: rgba(16,185,129,0.12);
       --red: #ef4444; --red-light: #fca5a5; --red-bg: rgba(239,68,68,0.1);
-      --purple: #a855f7; --purple-light: #d8b4fe; --purple-bg: rgba(168,85,247,0.12);
       --teal: #14b8a6; --teal-light: #5eead4;
+      --purple: #a855f7; --purple-light: #d8b4fe;
       --radius: 10px;
     }
     html, body { height: 100%; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; }
     .app { display: flex; flex-direction: column; height: 100dvh; max-width: 680px; margin: 0 auto; }
 
-    header { padding: 14px 20px 0; }
-    .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    header { padding: 12px 20px 0; }
+    .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .logo { font-size: 17px; font-weight: 700; letter-spacing: -0.5px; display: flex; align-items: baseline; gap: 6px; }
-    .logo span.accent { color: var(--blue); }
-    .logo span.ver { font-size: 10px; font-weight: 400; color: var(--text3); }
-    .sync-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); }
-    .sync-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text3); flex-shrink: 0; }
+    .logo .accent { color: var(--blue); }
+    .logo .ver { font-size: 10px; font-weight: 400; color: var(--text3); }
+    .sync-status { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text3); }
+    .sync-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text3); flex-shrink: 0; }
     .sync-dot.ok { background: var(--green); }
     .sync-dot.err { background: var(--red); }
     .sync-dot.syncing { background: var(--amber); animation: pulse 1s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-    .header-controls { display: flex; align-items: center; gap: 8px; }
-    .year-nav { display: flex; align-items: center; gap: 6px; }
-    .year-btn { background: var(--bg2); border: 0.5px solid var(--border2); color: var(--text2); border-radius: 8px; padding: 4px 9px; cursor: pointer; font-size: 13px; }
-    #year-display { font-size: 14px; font-weight: 600; min-width: 36px; text-align: center; }
+    .header-controls { display: flex; align-items: center; gap: 6px; }
+    .year-nav { display: flex; align-items: center; gap: 5px; }
+    .year-btn { background: var(--bg2); border: 0.5px solid var(--border2); color: var(--text2); border-radius: 7px; padding: 3px 8px; cursor: pointer; font-size: 12px; }
+    #year-display { font-size: 13px; font-weight: 600; min-width: 34px; text-align: center; }
     .mode-pill { display: flex; background: var(--bg2); border-radius: 20px; padding: 2px; gap: 2px; border: 0.5px solid var(--border); }
-    .mode-pill button { padding: 3px 10px; border: none; border-radius: 16px; font-size: 12px; font-weight: 600; cursor: pointer; background: transparent; color: var(--text2); }
+    .mode-pill button { padding: 2px 9px; border: none; border-radius: 16px; font-size: 11px; font-weight: 600; cursor: pointer; background: transparent; color: var(--text2); }
     .mode-pill button.active { background: var(--blue); color: #fff; }
 
-    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 10px 20px; }
-    .metric { background: var(--bg2); border-radius: var(--radius); padding: 9px 11px; border: 0.5px solid var(--border); }
-    .metric-label { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
-    .metric-value { font-size: 14px; font-weight: 700; letter-spacing: -0.3px; }
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; padding: 8px 20px; }
+    .metric { background: var(--bg2); border-radius: 8px; padding: 8px 10px; border: 0.5px solid var(--border); }
+    .metric-label { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+    .metric-value { font-size: 13px; font-weight: 700; }
     .metric-value.blue { color: var(--blue-light); }
     .metric-value.amber { color: var(--amber-light); }
     .metric-value.red { color: var(--red-light); }
@@ -56,82 +56,106 @@
     .metric-value.teal { color: var(--teal-light); }
     .metric-value.purple { color: var(--purple-light); }
 
-    .chart-section { padding: 0 20px 6px; }
-    .chart-legend { display: flex; gap: 10px; margin-bottom: 5px; flex-wrap: wrap; }
-    .legend-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--text2); }
-    .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
-    .legend-line { width: 16px; height: 2px; border-radius: 1px; }
-    .chart-wrap { position: relative; height: 160px; }
+    .chart-section { padding: 0 20px 4px; }
+    .chart-legend { display: flex; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 3px; font-size: 9px; color: var(--text2); }
+    .legend-dot { width: 7px; height: 7px; border-radius: 2px; }
+    .legend-line { width: 14px; height: 2px; border-radius: 1px; }
+    .chart-wrap { position: relative; height: 140px; }
 
     .tabs { display: flex; border-top: 0.5px solid var(--border); background: var(--bg); }
-    .tab { flex: 1; padding: 10px 8px 8px; background: none; border: none; color: var(--text3); cursor: pointer; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3px; }
-    .tab svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+    .tab { flex: 1; padding: 8px 4px 6px; background: none; border: none; color: var(--text3); cursor: pointer; font-size: 10px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .tab svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; }
     .tab.active { color: var(--blue); }
 
     .panels { flex: 1; overflow: hidden; }
-    .panel { display: none; height: 100%; overflow-y: auto; padding: 14px 20px; }
+    .panel { display: none; height: 100%; overflow-y: auto; padding: 12px 20px; }
     .panel.active { display: block; }
 
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
     .form-group.full { grid-column: 1 / -1; }
-    label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; }
-    input, select { background: var(--bg2); border: 0.5px solid var(--border2); color: var(--text); border-radius: var(--radius); padding: 0 12px; height: 42px; font-size: 15px; -webkit-appearance: none; }
+    label { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; }
+    input, select { background: var(--bg2); border: 0.5px solid var(--border2); color: var(--text); border-radius: var(--radius); padding: 0 10px; height: 40px; font-size: 14px; -webkit-appearance: none; }
     input::placeholder { color: var(--text3); }
     input:focus, select:focus { outline: none; border-color: var(--blue); }
     select option { background: var(--bg2); }
-    .status-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-    .status-btn { height: 48px; border-radius: var(--radius); border: 1.5px solid var(--border2); background: var(--bg2); color: var(--text2); font-size: 14px; font-weight: 600; cursor: pointer; }
+    .status-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+    .status-btn { height: 44px; border-radius: var(--radius); border: 1.5px solid var(--border2); background: var(--bg2); color: var(--text2); font-size: 13px; font-weight: 600; cursor: pointer; }
     .status-btn.sel-signed { border-color: var(--blue); background: var(--blue-bg); color: var(--blue-light); }
     .status-btn.sel-option { border-color: var(--amber); background: var(--amber-bg); color: var(--amber-light); }
-    .btn-submit { width: 100%; height: 50px; background: var(--blue); color: #fff; border: none; border-radius: var(--radius); font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .btn-submit { width: 100%; height: 46px; background: var(--blue); color: #fff; border: none; border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 4px; }
     .btn-submit:active { opacity: 0.85; }
-    .msg { text-align: center; font-size: 13px; min-height: 20px; margin-top: 8px; }
+    .msg { text-align: center; font-size: 12px; min-height: 18px; margin-top: 6px; }
     .msg.ok { color: var(--green); }
     .msg.err { color: #f87171; }
 
-    .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .list-count { font-size: 13px; color: var(--text3); }
-    .entry-card { background: var(--bg2); border-radius: var(--radius); border: 0.5px solid var(--border); padding: 12px 14px; margin-bottom: 8px; }
-    .entry-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
-    .entry-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    /* Entries list */
+    .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .list-count { font-size: 12px; color: var(--text3); }
+    .entry-card { background: var(--bg2); border-radius: var(--radius); border: 0.5px solid var(--border); padding: 10px 12px; margin-bottom: 7px; }
+    .entry-top { display: flex; align-items: flex-start; gap: 9px; margin-bottom: 8px; }
+    .entry-icon { width: 33px; height: 33px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
     .entry-icon.signed { background: var(--blue-bg); color: var(--blue-light); }
     .entry-icon.option { background: var(--amber-bg); color: var(--amber-light); }
     .entry-body { flex: 1; min-width: 0; }
-    .entry-client { font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .entry-meta { font-size: 12px; color: var(--text3); margin-top: 2px; }
+    .entry-client { font-weight: 700; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .entry-meta { font-size: 11px; color: var(--text3); margin-top: 1px; }
     .entry-right { text-align: right; flex-shrink: 0; }
-    .entry-amount { font-weight: 700; font-size: 16px; }
-    .entry-sub { font-size: 11px; color: var(--red-light); margin-top: 2px; }
-    .entry-net { font-size: 11px; color: var(--green-light); margin-top: 1px; }
-    .entry-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-top: 4px; }
+    .entry-amount { font-weight: 700; font-size: 15px; }
+    .entry-sub { font-size: 10px; color: var(--red-light); margin-top: 1px; }
+    .entry-net { font-size: 10px; color: var(--green-light); }
+    .entry-badge { display: inline-block; padding: 2px 7px; border-radius: 9px; font-size: 10px; font-weight: 600; margin-top: 3px; }
     .badge-signed { background: var(--blue-bg); color: var(--blue-light); }
     .badge-option { background: var(--amber-bg); color: var(--amber-light); }
-    .entry-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; padding-top: 10px; border-top: 0.5px solid var(--border); }
-    .btn-paid { height: 32px; background: var(--green-bg); border: 0.5px solid rgba(16,185,129,0.3); color: var(--green-light); border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
-    .btn-paid:hover { background: rgba(16,185,129,0.2); }
-    .btn-edit { height: 32px; background: var(--blue-bg); border: 0.5px solid rgba(59,130,246,0.3); color: var(--blue-light); border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
-    .btn-edit:hover { background: rgba(59,130,246,0.2); }
-    .btn-del { height: 32px; background: var(--red-bg); border: 0.5px solid rgba(239,68,68,0.2); color: var(--red-light); border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; }
-    .btn-del:hover { background: rgba(239,68,68,0.18); }
-    .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text3); }
-    .empty-state p { margin-top: 8px; font-size: 14px; }
+    .entry-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; padding-top: 8px; border-top: 0.5px solid var(--border); }
+    .btn-paid { height: 30px; background: var(--green-bg); border: 0.5px solid rgba(16,185,129,0.3); color: var(--green-light); border-radius: 7px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .btn-edit { height: 30px; background: var(--blue-bg); border: 0.5px solid rgba(59,130,246,0.3); color: var(--blue-light); border-radius: 7px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .btn-del { height: 30px; background: var(--red-bg); border: 0.5px solid rgba(239,68,68,0.2); color: var(--red-light); border-radius: 7px; font-size: 11px; font-weight: 600; cursor: pointer; }
+    .empty-state { text-align: center; padding: 2.5rem 1rem; color: var(--text3); }
+    .empty-state p { margin-top: 6px; font-size: 13px; }
 
-    .settings-section { margin-bottom: 20px; }
-    .settings-title { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
-    .settings-card { background: var(--bg2); border-radius: var(--radius); border: 0.5px solid var(--border); padding: 16px; }
-    .settings-card p { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
-    .field-row { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; }
-    .btn-save { width: 100%; height: 44px; background: var(--blue); color: #fff; border: none; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; }
-    .btn-secondary { width: 100%; height: 44px; background: transparent; border: 0.5px solid var(--border2); color: var(--text2); border-radius: var(--radius); font-size: 14px; cursor: pointer; margin-top: 8px; }
-    .conn-status { padding: 10px 12px; background: var(--bg3); border-radius: var(--radius); font-size: 13px; color: var(--text2); margin-top: 10px; display: none; }
+    /* Clients */
+    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .section-title { font-size: 13px; font-weight: 600; color: var(--text2); }
+    .btn-add-client { height: 32px; background: var(--blue); color: #fff; border: none; border-radius: 8px; padding: 0 14px; font-size: 12px; font-weight: 600; cursor: pointer; }
+    .client-card { background: var(--bg2); border-radius: var(--radius); border: 0.5px solid var(--border); padding: 10px 14px; margin-bottom: 7px; display: flex; align-items: center; gap: 10px; }
+    .client-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--blue-bg); color: var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .client-body { flex: 1; min-width: 0; }
+    .client-name { font-weight: 700; font-size: 14px; }
+    .client-meta { font-size: 11px; color: var(--text3); margin-top: 1px; }
+    .client-actions { display: flex; gap: 5px; }
+    .btn-client-edit { height: 28px; width: 28px; background: var(--blue-bg); border: 0.5px solid rgba(59,130,246,0.3); color: var(--blue-light); border-radius: 6px; font-size: 12px; cursor: pointer; }
+    .btn-client-del { height: 28px; width: 28px; background: var(--red-bg); border: 0.5px solid rgba(239,68,68,0.2); color: var(--red-light); border-radius: 6px; font-size: 12px; cursor: pointer; }
 
+    /* Stats */
+    .stats-toggle { display: flex; background: var(--bg2); border-radius: 20px; padding: 2px; gap: 2px; border: 0.5px solid var(--border); margin-bottom: 12px; width: fit-content; }
+    .stats-toggle button { padding: 5px 16px; border: none; border-radius: 16px; font-size: 12px; font-weight: 600; cursor: pointer; background: transparent; color: var(--text2); }
+    .stats-toggle button.active { background: var(--blue); color: #fff; }
+    .pie-wrap { position: relative; height: 220px; margin-bottom: 14px; }
+    .stats-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .stats-table th { text-align: left; padding: 6px 8px; font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 0.5px solid var(--border2); }
+    .stats-table td { padding: 8px 8px; border-bottom: 0.5px solid var(--border); color: var(--text); vertical-align: middle; }
+    .stats-table tr:last-child td { border: none; }
+    .client-dot { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+
+    /* Settings */
+    .settings-section { margin-bottom: 16px; }
+    .settings-title { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+    .settings-card { background: var(--bg2); border-radius: var(--radius); border: 0.5px solid var(--border); padding: 14px; }
+    .settings-card p { font-size: 13px; color: var(--text2); line-height: 1.5; margin-bottom: 8px; }
+    .field-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 8px; }
+    .btn-save { width: 100%; height: 42px; background: var(--blue); color: #fff; border: none; border-radius: var(--radius); font-size: 13px; font-weight: 600; cursor: pointer; }
+    .btn-secondary { width: 100%; height: 42px; background: transparent; border: 0.5px solid var(--border2); color: var(--text2); border-radius: var(--radius); font-size: 13px; cursor: pointer; margin-top: 7px; }
+    .conn-status { padding: 9px 11px; background: var(--bg3); border-radius: var(--radius); font-size: 12px; color: var(--text2); margin-top: 8px; display: none; }
+
+    /* Modal */
     .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 100; display: flex; align-items: flex-end; justify-content: center; }
     .modal-backdrop.hidden { display: none; }
-    .modal { background: var(--bg2); border-radius: 20px 20px 0 0; padding: 20px 20px 32px; width: 100%; max-width: 680px; border: 0.5px solid var(--border2); max-height: 90vh; overflow-y: auto; }
-    .modal-title { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
-    .modal-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
-    .modal-btns button { height: 46px; border-radius: var(--radius); font-size: 15px; font-weight: 600; cursor: pointer; border: none; }
+    .modal { background: var(--bg2); border-radius: 20px 20px 0 0; padding: 18px 20px 28px; width: 100%; max-width: 680px; border: 0.5px solid var(--border2); max-height: 90vh; overflow-y: auto; }
+    .modal-title { font-size: 15px; font-weight: 700; margin-bottom: 14px; }
+    .modal-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .modal-btns button { height: 44px; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; border: none; }
     .btn-cancel { background: var(--bg3); color: var(--text2); }
     .btn-confirm { background: var(--blue); color: #fff; }
   </style>
@@ -141,7 +165,7 @@
   <header>
     <div class="header-top">
       <div style="display:flex;align-items:center;gap:10px;">
-        <div class="logo">factu<span class="accent">.</span>app <span class="ver" id="app-version">v1.1.0</span></div>
+        <div class="logo">factu<span class="accent">.</span>app <span class="ver" id="app-version">v1.2.0</span></div>
         <div class="sync-status">
           <div class="sync-dot" id="sync-dot"></div>
           <span id="sync-label">Non connecté</span>
@@ -165,8 +189,8 @@
     <div class="metric"><div class="metric-label">Signés</div><div class="metric-value blue" id="m-signed">0 €</div></div>
     <div class="metric"><div class="metric-label">Options</div><div class="metric-value amber" id="m-option">0 €</div></div>
     <div class="metric"><div class="metric-label">Sous-traitants</div><div class="metric-value red" id="m-sub">0 €</div></div>
-    <div class="metric"><div class="metric-label">Net poche (avec options)</div><div class="metric-value green" id="m-net-with">0 €</div></div>
-    <div class="metric"><div class="metric-label">Net poche (sans options)</div><div class="metric-value teal" id="m-net-without">0 €</div></div>
+    <div class="metric"><div class="metric-label">Net (avec opt.)</div><div class="metric-value green" id="m-net-with">0 €</div></div>
+    <div class="metric"><div class="metric-label">Net (sans opt.)</div><div class="metric-value teal" id="m-net-without">0 €</div></div>
     <div class="metric"><div class="metric-label">Total brut</div><div class="metric-value purple" id="m-total">0 €</div></div>
   </div>
 
@@ -174,107 +198,109 @@
     <div class="chart-legend">
       <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div>Signés</div>
       <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>Options</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div>Sous-traitants</div>
-      <div class="legend-item"><div class="legend-line" style="background:#6ee7b7;"></div>Net (avec opt.)</div>
-      <div class="legend-item"><div class="legend-line" style="background:#5eead4;border-top: 2px dashed #5eead4;background:transparent;"></div>Net (sans opt.)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div>ST</div>
+      <div class="legend-item"><div class="legend-line" style="background:#6ee7b7;height:2px;"></div>Net opt.</div>
+      <div class="legend-item"><div class="legend-line" style="background:transparent;border-top:2px dashed #5eead4;"></div>Net sans</div>
     </div>
     <div class="chart-wrap">
-      <canvas id="mainChart" role="img" aria-label="Graphique mensuel des entrées d'argent">Données mensuelles.</canvas>
+      <canvas id="mainChart" role="img" aria-label="Graphique mensuel">Données mensuelles.</canvas>
     </div>
   </div>
 
-  <!-- Modal édition -->
-  <div class="modal-backdrop hidden" id="modal-backdrop" onclick="closeModalOutside(event)">
-    <div class="modal" id="modal-box">
+  <!-- Modal entrée -->
+  <div class="modal-backdrop hidden" id="modal-entry" onclick="closeModalEntry(event)">
+    <div class="modal">
       <div class="modal-title">Modifier l'entrée</div>
       <div class="form-row">
-        <div class="form-group full">
-          <label>Client</label>
-          <input type="text" id="e-client" placeholder="Nom du client"/>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Date de prestation</label>
-          <input type="date" id="e-date"/>
-        </div>
-        <div class="form-group">
-          <label>Montant HT (€)</label>
-          <input type="number" id="e-ht" step="0.01" min="0" inputmode="decimal"/>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>TVA</label>
-          <select id="e-tva">
-            <option value="20">20 % — standard</option>
-            <option value="10">10 % — réduit</option>
-            <option value="5.5">5,5 % — réduit</option>
-            <option value="2.1">2,1 % — super réduit</option>
-            <option value="0">0 % — exonéré</option>
+        <div class="form-group full"><label>Client</label>
+          <select id="e-client-sel" onchange="prefillEditFromClient()">
+            <option value="">— Sélectionner —</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>Sous-traitant HT (€)</label>
-          <input type="number" id="e-sub" step="0.01" min="0" placeholder="0.00" inputmode="decimal"/>
-        </div>
       </div>
       <div class="form-row">
-        <div class="form-group full">
-          <label>Description</label>
-          <input type="text" id="e-desc" placeholder="Optionnel"/>
+        <div class="form-group"><label>Date</label><input type="date" id="e-date"/></div>
+        <div class="form-group"><label>Montant HT (€)</label><input type="number" id="e-ht" step="0.01" min="0" inputmode="decimal"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>TVA</label>
+          <select id="e-tva">
+            <option value="20">20 %</option><option value="10">10 %</option>
+            <option value="5.5">5,5 %</option><option value="2.1">2,1 %</option><option value="0">0 %</option>
+          </select>
         </div>
+        <div class="form-group"><label>Sous-traitant HT (€)</label><input type="number" id="e-sub" step="0.01" min="0" placeholder="0.00" inputmode="decimal"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label>Description</label><input type="text" id="e-desc" placeholder="Optionnel"/></div>
       </div>
       <div class="status-row">
-        <button class="status-btn sel-signed" id="e-btn-signed" onclick="selectEditStatus('signed')">✓ Contrat signé</button>
-        <button class="status-btn" id="e-btn-option" onclick="selectEditStatus('option')">◇ En option</button>
+        <button class="status-btn sel-signed" id="e-btn-signed" onclick="selectEditStatus('signed')">✓ Signé</button>
+        <button class="status-btn" id="e-btn-option" onclick="selectEditStatus('option')">◇ Option</button>
       </div>
       <div class="modal-btns">
-        <button class="btn-cancel" onclick="closeModal()">Annuler</button>
+        <button class="btn-cancel" onclick="closeModal('modal-entry')">Annuler</button>
         <button class="btn-confirm" onclick="saveEdit()">Enregistrer</button>
       </div>
     </div>
   </div>
 
-  <div class="panels">
-    <div class="panel active" id="panel-add">
+  <!-- Modal client -->
+  <div class="modal-backdrop hidden" id="modal-client" onclick="closeModalClient(event)">
+    <div class="modal">
+      <div class="modal-title" id="modal-client-title">Nouveau client</div>
       <div class="form-row">
-        <div class="form-group full">
-          <label>Client</label>
-          <input type="text" id="f-client" placeholder="Nom du client ou société" autocomplete="organization"/>
-        </div>
+        <div class="form-group full"><label>Nom du client</label><input type="text" id="c-name" placeholder="Nom ou société"/></div>
       </div>
       <div class="form-row">
-        <div class="form-group">
-          <label>Date de prestation</label>
-          <input type="date" id="f-date"/>
-        </div>
-        <div class="form-group">
-          <label>Montant HT (€)</label>
-          <input type="number" id="f-ht" placeholder="0.00" step="0.01" min="0" inputmode="decimal"/>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>TVA</label>
-          <select id="f-tva">
-            <option value="20">20 % — standard</option>
-            <option value="10">10 % — réduit</option>
-            <option value="5.5">5,5 % — réduit</option>
-            <option value="2.1">2,1 % — super réduit</option>
-            <option value="0">0 % — exonéré</option>
+        <div class="form-group"><label>Montant HT de base (€)</label><input type="number" id="c-amount" step="0.01" min="0" placeholder="0.00" inputmode="decimal"/></div>
+        <div class="form-group"><label>TVA par défaut</label>
+          <select id="c-tva">
+            <option value="20">20 % — standard</option><option value="10">10 % — réduit</option>
+            <option value="5.5">5,5 % — réduit</option><option value="2.1">2,1 % — super réduit</option><option value="0">0 % — exonéré</option>
           </select>
         </div>
-        <div class="form-group">
-          <label>Sous-traitant HT (€)</label>
-          <input type="number" id="f-sub" placeholder="0.00" step="0.01" min="0" inputmode="decimal"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label>Note (optionnel)</label><input type="text" id="c-note" placeholder="Ex : agence Paris, contact dupont..."/></div>
+      </div>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeModal('modal-client')">Annuler</button>
+        <button class="btn-confirm" onclick="saveClient()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panels">
+    <!-- Nouveau -->
+    <div class="panel active" id="panel-add">
+      <div class="form-row">
+        <div class="form-group full"><label>Client</label>
+          <select id="f-client-sel" onchange="prefillFromClient()">
+            <option value="">— Sélectionner ou saisir —</option>
+          </select>
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group full">
-          <label>Description</label>
-          <input type="text" id="f-desc" placeholder="Optionnel"/>
+        <div class="form-group full"><label>Nom (si nouveau client)</label>
+          <input type="text" id="f-client-name" placeholder="Ou tape un nom libre"/>
         </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Date de prestation</label><input type="date" id="f-date"/></div>
+        <div class="form-group"><label>Montant HT (€)</label><input type="number" id="f-ht" placeholder="0.00" step="0.01" min="0" inputmode="decimal"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>TVA</label>
+          <select id="f-tva">
+            <option value="20">20 % — standard</option><option value="10">10 % — réduit</option>
+            <option value="5.5">5,5 % — réduit</option><option value="2.1">2,1 % — super réduit</option><option value="0">0 % — exonéré</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Sous-traitant HT (€)</label><input type="number" id="f-sub" placeholder="0.00" step="0.01" min="0" inputmode="decimal"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group full"><label>Description</label><input type="text" id="f-desc" placeholder="Optionnel"/></div>
       </div>
       <div class="status-row">
         <button class="status-btn sel-signed" id="btn-signed" onclick="selectStatus('signed')">✓ Contrat signé</button>
@@ -284,6 +310,7 @@
       <div class="msg" id="form-msg"></div>
     </div>
 
+    <!-- Entrées -->
     <div class="panel" id="panel-list">
       <div class="list-header">
         <span class="list-count" id="list-count">0 entrée(s)</span>
@@ -295,19 +322,38 @@
       <div id="entries-list"></div>
     </div>
 
+    <!-- Clients -->
+    <div class="panel" id="panel-clients">
+      <div class="section-header">
+        <span class="section-title" id="clients-count">0 client(s)</span>
+        <button class="btn-add-client" onclick="openClientModal()">+ Nouveau client</button>
+      </div>
+      <div id="clients-list"></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="panel" id="panel-stats">
+      <div class="stats-toggle">
+        <button class="active" id="stats-prev-btn" onclick="setStatsMode('prev',this)">Prévisionnel</button>
+        <button id="stats-paid-btn" onclick="setStatsMode('paid',this)">Payé</button>
+      </div>
+      <div class="pie-wrap">
+        <canvas id="pieChart" role="img" aria-label="Camembert par client">Répartition par client.</canvas>
+      </div>
+      <table class="stats-table">
+        <thead><tr><th>Client</th><th>Montant</th><th>%</th></tr></thead>
+        <tbody id="stats-table-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Réglages -->
     <div class="panel" id="panel-settings">
       <div class="settings-section">
         <div class="settings-title">Connexion NAS Synology</div>
         <div class="settings-card">
           <p>Entre l'adresse de ton NAS et le mot de passe pour activer la synchronisation automatique.</p>
-          <div class="field-row">
-            <label>URL de l'API</label>
-            <input type="url" id="s-url" placeholder="https://jourdainecyril.synology.me:3002"/>
-          </div>
-          <div class="field-row">
-            <label>Mot de passe secret</label>
-            <input type="password" id="s-secret" placeholder="Ton mot de passe"/>
-          </div>
+          <div class="field-row"><label>URL de l'API</label><input type="url" id="s-url" placeholder="https://jourdainecyril.synology.me:3002"/></div>
+          <div class="field-row"><label>Mot de passe secret</label><input type="password" id="s-secret" placeholder="Ton mot de passe"/></div>
           <button class="btn-save" onclick="saveConfig()">Enregistrer et tester la connexion</button>
           <div class="conn-status" id="conn-status"></div>
         </div>
@@ -315,9 +361,9 @@
       <div class="settings-section">
         <div class="settings-title">Synchronisation</div>
         <div class="settings-card">
-          <p>Les données sont synchronisées automatiquement à chaque ajout, modification ou suppression.</p>
+          <p>Les données sont synchronisées automatiquement à chaque modification.</p>
           <button class="btn-save" style="background:var(--bg3);border:0.5px solid var(--border2);color:var(--text2);" onclick="pullFromNas()">↻ Forcer une synchronisation</button>
-          <button class="btn-secondary" onclick="if(confirm('Effacer toutes les données locales ?')){entries=[];saveLocal();renderAll();}">🗑 Effacer les données locales</button>
+          <button class="btn-secondary" onclick="if(confirm('Effacer toutes les données locales ?')){entries=[];clients=[];saveLocal();renderAll();}">🗑 Effacer les données locales</button>
         </div>
       </div>
     </div>
@@ -325,16 +371,19 @@
 
   <div class="tabs">
     <button class="tab active" id="tab-add" onclick="showPanel('add')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-      Nouveau
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Nouveau
     </button>
     <button class="tab" id="tab-list" onclick="showPanel('list')">
-      <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-      Entrées
+      <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>Entrées
+    </button>
+    <button class="tab" id="tab-clients" onclick="showPanel('clients')">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clients
+    </button>
+    <button class="tab" id="tab-stats" onclick="showPanel('stats')">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Stats
     </button>
     <button class="tab" id="tab-settings" onclick="showPanel('settings')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      Réglages
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Réglages
     </button>
   </div>
 </div>
@@ -342,19 +391,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
 let entries = [];
+let clients = [];
 let mode = 'HT';
 let currentYear = new Date().getFullYear();
 let selectedStatus = 'signed';
 let editStatus = 'signed';
 let editId = null;
-let chart = null;
+let editClientId = null;
+let mainChart = null;
+let pieChart = null;
+let statsMode = 'prev';
 let apiUrl = '';
 let apiSecret = '';
 
 const MONTHS = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
-const KEY = 'facturation_v4';
+const KEY = 'facturation_v5';
+const CLI_KEY = 'facturation_clients_v1';
 const CONF_KEY = 'facturation_conf';
 
+const PIE_COLORS = ['#3b82f6','#f59e0b','#10b981','#ef4444','#a855f7','#14b8a6','#f97316','#ec4899','#84cc16','#06b6d4','#8b5cf6','#eab308'];
+
+// ── Config ──
 function loadConfig() {
   try {
     const c = JSON.parse(localStorage.getItem(CONF_KEY) || '{}');
@@ -363,7 +420,6 @@ function loadConfig() {
     if (apiSecret) document.getElementById('s-secret').value = apiSecret;
   } catch(e) {}
 }
-
 function saveConfig() {
   apiUrl = document.getElementById('s-url').value.trim().replace(/\/$/, '');
   apiSecret = document.getElementById('s-secret').value.trim();
@@ -371,6 +427,7 @@ function saveConfig() {
   testConnection();
 }
 
+// ── API ──
 function hdrs() { return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiSecret }; }
 
 async function testConnection() {
@@ -386,273 +443,387 @@ async function testConnection() {
       setSyncStatus('ok', 'Synchronisé');
       await pullFromNas();
     } else throw new Error();
-  } catch(e) {
-    el.textContent = '✗ Connexion impossible — vérifie l\'URL et le mot de passe';
-    el.style.color = '#f87171';
-    setSyncStatus('err', 'Non connecté');
-  }
+  } catch(e) { el.textContent = '✗ Connexion impossible'; el.style.color = '#f87171'; setSyncStatus('err', 'Non connecté'); }
 }
 
 async function pullFromNas() {
   if (!apiUrl || !apiSecret) return;
   setSyncStatus('syncing', 'Synchronisation...');
   try {
-    const r = await fetch(apiUrl + '/entries', { headers: hdrs() });
-    if (!r.ok) throw new Error();
-    entries = await r.json();
+    const [re, rc] = await Promise.all([
+      fetch(apiUrl + '/entries', { headers: hdrs() }),
+      fetch(apiUrl + '/clients', { headers: hdrs() })
+    ]);
+    if (!re.ok) throw new Error();
+    entries = await re.json();
+    if (rc.ok) clients = await rc.json();
     saveLocal(); renderAll();
     setSyncStatus('ok', 'Synchronisé');
   } catch(e) { setSyncStatus('err', 'Hors ligne'); }
 }
 
-async function pushEntry(entry) {
+async function apiPost(path, data) {
   if (!apiUrl || !apiSecret) return;
-  try {
-    await fetch(apiUrl + '/entries', { method: 'POST', headers: hdrs(), body: JSON.stringify(entry) });
-    setSyncStatus('ok', 'Synchronisé');
-  } catch(e) { setSyncStatus('err', 'Hors ligne — sauvegardé localement'); }
+  try { await fetch(apiUrl + path, { method:'POST', headers:hdrs(), body:JSON.stringify(data) }); setSyncStatus('ok','Synchronisé'); }
+  catch(e) { setSyncStatus('err','Hors ligne — sauvegardé localement'); }
+}
+async function apiPut(path, data) {
+  if (!apiUrl || !apiSecret) return;
+  try { await fetch(apiUrl + path, { method:'PUT', headers:hdrs(), body:JSON.stringify(data) }); setSyncStatus('ok','Synchronisé'); }
+  catch(e) { setSyncStatus('err','Hors ligne — sauvegardé localement'); }
+}
+async function apiDelete(path) {
+  if (!apiUrl || !apiSecret) return;
+  try { await fetch(apiUrl + path, { method:'DELETE', headers:hdrs() }); } catch(e) {}
 }
 
-async function updateEntryOnNas(entry) {
-  if (!apiUrl || !apiSecret) return;
-  try {
-    await fetch(apiUrl + '/entries/' + entry.id, { method: 'PUT', headers: hdrs(), body: JSON.stringify(entry) });
-    setSyncStatus('ok', 'Synchronisé');
-  } catch(e) { setSyncStatus('err', 'Hors ligne — sauvegardé localement'); }
+// ── Local storage ──
+function saveLocal() {
+  try { localStorage.setItem(KEY, JSON.stringify(entries)); localStorage.setItem(CLI_KEY, JSON.stringify(clients)); } catch(e) {}
 }
-
-async function deleteEntryFromNas(id) {
-  if (!apiUrl || !apiSecret) return;
-  try { await fetch(apiUrl + '/entries/' + id, { method: 'DELETE', headers: hdrs() }); } catch(e) {}
+function loadLocal() {
+  try { const d=localStorage.getItem(KEY); if(d) entries=JSON.parse(d); const c=localStorage.getItem(CLI_KEY); if(c) clients=JSON.parse(c); } catch(e) {}
 }
-
-function saveLocal() { try { localStorage.setItem(KEY, JSON.stringify(entries)); } catch(e) {} }
-function loadLocal() { try { const d = localStorage.getItem(KEY); if (d) entries = JSON.parse(d); } catch(e) {} }
 function setSyncStatus(state, label) {
   document.getElementById('sync-dot').className = 'sync-dot ' + state;
   document.getElementById('sync-label').textContent = label;
 }
 
+// ── Navigation ──
 function showPanel(id) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('panel-'+id).classList.add('active');
   document.getElementById('tab-'+id).classList.add('active');
-  if (id === 'list') renderList();
+  if (id==='list') renderList();
+  if (id==='clients') renderClients();
+  if (id==='stats') renderStats();
 }
 
-function changeYear(d) {
-  currentYear += d;
-  document.getElementById('year-display').textContent = currentYear;
-  updateDashboard();
-}
+function changeYear(d) { currentYear+=d; document.getElementById('year-display').textContent=currentYear; updateDashboard(); }
 
 function setMode(m) {
   mode = m;
-  document.querySelectorAll('.mode-pill button').forEach(b => b.classList.toggle('active', b.textContent === m));
+  document.querySelectorAll('.mode-pill button').forEach(b => b.classList.toggle('active', b.textContent===m));
   renderAll();
 }
 
+function setStatsMode(m, el) {
+  statsMode = m;
+  document.querySelectorAll('.stats-toggle button').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderStats();
+}
+
+// ── Status ──
 function selectStatus(s) {
   selectedStatus = s;
-  document.getElementById('btn-signed').className = 'status-btn' + (s==='signed' ? ' sel-signed' : '');
-  document.getElementById('btn-option').className = 'status-btn' + (s==='option' ? ' sel-option' : '');
+  document.getElementById('btn-signed').className = 'status-btn'+(s==='signed'?' sel-signed':'');
+  document.getElementById('btn-option').className = 'status-btn'+(s==='option'?' sel-option':'');
 }
-
 function selectEditStatus(s) {
   editStatus = s;
-  document.getElementById('e-btn-signed').className = 'status-btn' + (s==='signed' ? ' sel-signed' : '');
-  document.getElementById('e-btn-option').className = 'status-btn' + (s==='option' ? ' sel-option' : '');
+  document.getElementById('e-btn-signed').className = 'status-btn'+(s==='signed'?' sel-signed':'');
+  document.getElementById('e-btn-option').className = 'status-btn'+(s==='option'?' sel-option':'');
 }
 
-function openEditModal(id) {
-  const e = entries.find(x => x.id === id);
-  if (!e) return;
-  editId = id;
-  document.getElementById('e-client').value = e.client;
-  document.getElementById('e-date').value = e.date;
-  document.getElementById('e-ht').value = e.ht;
-  document.getElementById('e-tva').value = e.tva;
-  document.getElementById('e-sub').value = e.sub || 0;
-  document.getElementById('e-desc').value = e.desc || '';
-  selectEditStatus(e.status);
-  document.getElementById('modal-backdrop').classList.remove('hidden');
+// ── Client prefill ──
+function prefillFromClient() {
+  const id = document.getElementById('f-client-sel').value;
+  if (!id) return;
+  const c = clients.find(x => x.id == id);
+  if (!c) return;
+  document.getElementById('f-client-name').value = '';
+  if (c.amount) document.getElementById('f-ht').value = c.amount;
+  document.getElementById('f-tva').value = c.tva || 20;
 }
 
-function closeModal() { document.getElementById('modal-backdrop').classList.add('hidden'); editId = null; }
-function closeModalOutside(ev) { if (ev.target === document.getElementById('modal-backdrop')) closeModal(); }
-
-async function saveEdit() {
-  if (!editId) return;
-  const ht = parseFloat(document.getElementById('e-ht').value);
-  const tva = parseFloat(document.getElementById('e-tva').value);
-  const sub = parseFloat(document.getElementById('e-sub').value) || 0;
-  const idx = entries.findIndex(x => x.id === editId);
-  if (idx === -1) return;
-  entries[idx] = { ...entries[idx],
-    client: document.getElementById('e-client').value.trim(),
-    date: document.getElementById('e-date').value,
-    ht: Math.round(ht*100)/100, tva,
-    ttc: Math.round(ht*(1+tva/100)*100)/100,
-    sub: Math.round(sub*100)/100,
-    subTtc: Math.round(sub*(1+tva/100)*100)/100,
-    desc: document.getElementById('e-desc').value.trim(),
-    status: editStatus
-  };
-  saveLocal(); renderAll();
-  await updateEntryOnNas(entries[idx]);
-  closeModal();
+function prefillEditFromClient() {
+  const id = document.getElementById('e-client-sel').value;
+  if (!id) return;
+  const c = clients.find(x => x.id == id);
+  if (!c) return;
+  if (c.amount) document.getElementById('e-ht').value = c.amount;
+  document.getElementById('e-tva').value = c.tva || 20;
 }
 
+function refreshClientSelects() {
+  const opts = '<option value="">— Sélectionner —</option>' + clients.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+  document.getElementById('f-client-sel').innerHTML = opts;
+  document.getElementById('e-client-sel').innerHTML = opts;
+}
+
+function getClientName(entry) {
+  if (entry.clientId) {
+    const c = clients.find(x => x.id == entry.clientId);
+    if (c) return c.name;
+  }
+  return entry.clientName || entry.client || '';
+}
+
+// ── Add entry ──
 async function addEntry() {
-  const client = document.getElementById('f-client').value.trim();
+  const clientId = document.getElementById('f-client-sel').value;
+  const clientName = clientId ? '' : document.getElementById('f-client-name').value.trim();
+  const displayName = clientId ? (clients.find(x=>x.id==clientId)||{}).name : clientName;
   const date = document.getElementById('f-date').value;
   const ht = parseFloat(document.getElementById('f-ht').value);
   const tva = parseFloat(document.getElementById('f-tva').value);
   const sub = parseFloat(document.getElementById('f-sub').value) || 0;
   const desc = document.getElementById('f-desc').value.trim();
   const msg = document.getElementById('form-msg');
-  if (!client || !date || isNaN(ht) || ht <= 0) {
-    msg.className = 'msg err'; msg.textContent = 'Renseigne le client, la date et le montant.'; return;
+  if ((!clientId && !clientName) || !date || isNaN(ht) || ht<=0) {
+    msg.className='msg err'; msg.textContent='Renseigne le client, la date et le montant.'; return;
   }
-  const entry = { id: Date.now(), client, date,
-    ht: Math.round(ht*100)/100, tva,
-    ttc: Math.round(ht*(1+tva/100)*100)/100,
-    sub: Math.round(sub*100)/100,
-    subTtc: Math.round(sub*(1+tva/100)*100)/100,
-    status: selectedStatus, desc
-  };
-  entries.push(entry);
+  const entry = { id:Date.now(), clientId:clientId||null, clientName:displayName,
+    date, ht:Math.round(ht*100)/100, tva, ttc:Math.round(ht*(1+tva/100)*100)/100,
+    sub:Math.round(sub*100)/100, subTtc:Math.round(sub*(1+tva/100)*100)/100,
+    status:selectedStatus, desc };
+  entries.push(entry); saveLocal(); renderAll();
+  await apiPost('/entries', entry);
+  document.getElementById('f-client-sel').value='';
+  document.getElementById('f-client-name').value='';
+  document.getElementById('f-ht').value='';
+  document.getElementById('f-sub').value='';
+  document.getElementById('f-desc').value='';
+  msg.className='msg ok'; msg.textContent='✓ Entrée ajoutée et synchronisée !';
+  setTimeout(()=>{ msg.textContent=''; },2500);
+}
+
+// ── Edit entry ──
+function openEditModal(id) {
+  const e = entries.find(x=>x.id===id); if(!e) return;
+  editId = id;
+  refreshClientSelects();
+  document.getElementById('e-client-sel').value = e.clientId || '';
+  document.getElementById('e-date').value = e.date;
+  document.getElementById('e-ht').value = e.ht;
+  document.getElementById('e-tva').value = e.tva;
+  document.getElementById('e-sub').value = e.sub || 0;
+  document.getElementById('e-desc').value = e.desc || '';
+  selectEditStatus(e.status);
+  document.getElementById('modal-entry').classList.remove('hidden');
+}
+
+function closeModalEntry(ev) { if(ev.target===document.getElementById('modal-entry')) closeModal('modal-entry'); }
+function closeModalClient(ev) { if(ev.target===document.getElementById('modal-client')) closeModal('modal-client'); }
+function closeModal(id) { document.getElementById(id).classList.add('hidden'); editId=null; editClientId=null; }
+
+async function saveEdit() {
+  if(!editId) return;
+  const clientId = document.getElementById('e-client-sel').value;
+  const displayName = clientId ? (clients.find(x=>x.id==clientId)||{}).name : '';
+  const ht=parseFloat(document.getElementById('e-ht').value);
+  const tva=parseFloat(document.getElementById('e-tva').value);
+  const sub=parseFloat(document.getElementById('e-sub').value)||0;
+  const idx=entries.findIndex(x=>x.id===editId); if(idx===-1) return;
+  entries[idx]={...entries[idx], clientId:clientId||null, clientName:displayName||entries[idx].clientName,
+    date:document.getElementById('e-date').value,
+    ht:Math.round(ht*100)/100, tva, ttc:Math.round(ht*(1+tva/100)*100)/100,
+    sub:Math.round(sub*100)/100, subTtc:Math.round(sub*(1+tva/100)*100)/100,
+    desc:document.getElementById('e-desc').value.trim(), status:editStatus};
   saveLocal(); renderAll();
-  await pushEntry(entry);
-  document.getElementById('f-client').value = '';
-  document.getElementById('f-ht').value = '';
-  document.getElementById('f-sub').value = '';
-  document.getElementById('f-desc').value = '';
-  msg.className = 'msg ok'; msg.textContent = '✓ Entrée ajoutée et synchronisée !';
-  setTimeout(() => { msg.textContent = ''; }, 2500);
+  await apiPut('/entries/'+editId, entries[idx]);
+  closeModal('modal-entry');
 }
 
 async function deleteEntry(id) {
-  if (!confirm('Supprimer cette entrée ?')) return;
-  entries = entries.filter(e => e.id !== id);
-  saveLocal(); renderAll();
-  await deleteEntryFromNas(id);
+  if(!confirm('Supprimer cette entrée ?')) return;
+  entries=entries.filter(e=>e.id!==id); saveLocal(); renderAll();
+  await apiDelete('/entries/'+id);
 }
-
 async function markPaid(id) {
-  if (!confirm('Marquer comme payé et supprimer cette entrée ?')) return;
-  entries = entries.filter(e => e.id !== id);
-  saveLocal(); renderAll();
-  await deleteEntryFromNas(id);
+  if(!confirm('Marquer comme payé et supprimer ?')) return;
+  entries=entries.filter(e=>e.id!==id); saveLocal(); renderAll();
+  await apiDelete('/entries/'+id);
 }
 
+// ── Clients ──
+function openClientModal(id) {
+  editClientId = id || null;
+  document.getElementById('modal-client-title').textContent = id ? 'Modifier le client' : 'Nouveau client';
+  if (id) {
+    const c = clients.find(x=>x.id===id); if(!c) return;
+    document.getElementById('c-name').value = c.name;
+    document.getElementById('c-amount').value = c.amount || '';
+    document.getElementById('c-tva').value = c.tva || 20;
+    document.getElementById('c-note').value = c.note || '';
+  } else {
+    document.getElementById('c-name').value='';
+    document.getElementById('c-amount').value='';
+    document.getElementById('c-tva').value=20;
+    document.getElementById('c-note').value='';
+  }
+  document.getElementById('modal-client').classList.remove('hidden');
+}
+
+async function saveClient() {
+  const name = document.getElementById('c-name').value.trim();
+  if(!name) return;
+  const data = { name, amount:parseFloat(document.getElementById('c-amount').value)||0,
+    tva:parseFloat(document.getElementById('c-tva').value)||20,
+    note:document.getElementById('c-note').value.trim() };
+  if (editClientId) {
+    const idx=clients.findIndex(x=>x.id===editClientId);
+    clients[idx]={...clients[idx],...data};
+    saveLocal(); renderClients(); refreshClientSelects();
+    await apiPut('/clients/'+editClientId, clients[idx]);
+  } else {
+    const c={id:Date.now(),...data};
+    clients.push(c); saveLocal(); renderClients(); refreshClientSelects();
+    await apiPost('/clients', c);
+  }
+  closeModal('modal-client');
+}
+
+async function deleteClient(id) {
+  if(!confirm('Supprimer ce client ?')) return;
+  clients=clients.filter(c=>c.id!==id); saveLocal(); renderClients(); refreshClientSelects();
+  await apiDelete('/clients/'+id);
+}
+
+// ── Helpers ──
 function fmt(v) { return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(v); }
-function getVal(e) { return mode === 'HT' ? e.ht : e.ttc; }
-function getSubVal(e) { return mode === 'HT' ? (e.sub||0) : (e.subTtc||0); }
-function initials(n) { return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
+function getVal(e) { return mode==='HT'?e.ht:e.ttc; }
+function getSubVal(e) { return mode==='HT'?(e.sub||0):(e.subTtc||0); }
+function initials(n) { return (n||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
 
+// ── Dashboard ──
 function updateDashboard() {
-  const yr = entries.filter(e => new Date(e.date).getFullYear() === currentYear);
-  const signed = yr.filter(e => e.status==='signed');
-  const option = yr.filter(e => e.status==='option');
-  const sumS = signed.reduce((a,e)=>a+getVal(e),0);
-  const sumO = option.reduce((a,e)=>a+getVal(e),0);
-  const sumSub = yr.reduce((a,e)=>a+getSubVal(e),0);
-  const netWith = sumS + sumO - sumSub;
-  const netWithout = sumS - sumSub;
+  const yr=entries.filter(e=>new Date(e.date).getFullYear()===currentYear);
+  const sumS=yr.filter(e=>e.status==='signed').reduce((a,e)=>a+getVal(e),0);
+  const sumO=yr.filter(e=>e.status==='option').reduce((a,e)=>a+getVal(e),0);
+  const sumSub=yr.reduce((a,e)=>a+getSubVal(e),0);
+  document.getElementById('m-signed').textContent=fmt(sumS);
+  document.getElementById('m-option').textContent=fmt(sumO);
+  document.getElementById('m-sub').textContent=fmt(sumSub);
+  document.getElementById('m-net-with').textContent=fmt(sumS+sumO-sumSub);
+  document.getElementById('m-net-without').textContent=fmt(sumS-sumSub);
+  document.getElementById('m-total').textContent=fmt(sumS+sumO);
 
-  document.getElementById('m-signed').textContent = fmt(sumS);
-  document.getElementById('m-option').textContent = fmt(sumO);
-  document.getElementById('m-sub').textContent = fmt(sumSub);
-  document.getElementById('m-net-with').textContent = fmt(netWith);
-  document.getElementById('m-net-without').textContent = fmt(netWithout);
-  document.getElementById('m-total').textContent = fmt(sumS + sumO);
+  const dataS=Array(12).fill(0),dataO=Array(12).fill(0),dataSub=Array(12).fill(0);
+  yr.forEach(e=>{ const m=new Date(e.date).getMonth(); (e.status==='signed'?dataS:dataO)[m]+=getVal(e); dataSub[m]+=getSubVal(e); });
+  const dataNetWith=dataS.map((v,i)=>v+dataO[i]-dataSub[i]);
+  const dataNetWithout=dataS.map((v,i)=>v-dataSub[i]);
 
-  const dataS=Array(12).fill(0), dataO=Array(12).fill(0), dataSub=Array(12).fill(0);
-  yr.forEach(e => {
-    const m = new Date(e.date).getMonth();
-    if (e.status==='signed') dataS[m]+=getVal(e);
-    else dataO[m]+=getVal(e);
-    dataSub[m]+=getSubVal(e);
-  });
-
-  const dataNetWith = dataS.map((v,i) => v + dataO[i] - dataSub[i]);
-  const dataNetWithout = dataS.map((v,i) => v - dataSub[i]);
-
-  if (chart) chart.destroy();
-  chart = new Chart(document.getElementById('mainChart'), {
-    type: 'bar',
-    data: { labels: MONTHS, datasets: [
-      { type: 'bar', label:'Signés', data:dataS, backgroundColor:'#3b82f6', borderRadius:3, borderSkipped:false, order:2 },
-      { type: 'bar', label:'Options', data:dataO, backgroundColor:'#f59e0b', borderRadius:3, borderSkipped:false, order:2 },
-      { type: 'bar', label:'Sous-traitants', data:dataSub, backgroundColor:'#ef4444', borderRadius:3, borderSkipped:false, order:2 },
-      { type: 'line', label:'Net (avec opt.)', data:dataNetWith, borderColor:'#6ee7b7', backgroundColor:'rgba(110,231,183,0.1)', borderWidth:2, pointRadius:3, pointBackgroundColor:'#6ee7b7', tension:0.3, fill:false, order:1 },
-      { type: 'line', label:'Net (sans opt.)', data:dataNetWithout, borderColor:'#5eead4', backgroundColor:'rgba(94,234,212,0.05)', borderWidth:2, borderDash:[5,4], pointRadius:3, pointBackgroundColor:'#5eead4', tension:0.3, fill:false, order:1 }
+  if(mainChart) mainChart.destroy();
+  mainChart=new Chart(document.getElementById('mainChart'),{
+    type:'bar',
+    data:{labels:MONTHS,datasets:[
+      {type:'bar',label:'Signés',data:dataS,backgroundColor:'#3b82f6',borderRadius:3,borderSkipped:false,order:2},
+      {type:'bar',label:'Options',data:dataO,backgroundColor:'#f59e0b',borderRadius:3,borderSkipped:false,order:2},
+      {type:'bar',label:'ST',data:dataSub,backgroundColor:'#ef4444',borderRadius:3,borderSkipped:false,order:2},
+      {type:'line',label:'Net opt.',data:dataNetWith,borderColor:'#6ee7b7',borderWidth:2,pointRadius:2,pointBackgroundColor:'#6ee7b7',tension:0.3,fill:false,order:1},
+      {type:'line',label:'Net sans',data:dataNetWithout,borderColor:'#5eead4',borderWidth:2,borderDash:[5,4],pointRadius:2,pointBackgroundColor:'#5eead4',tension:0.3,fill:false,order:1}
     ]},
-    options: { responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>' '+fmt(ctx.raw)}} },
-      scales:{
-        x:{grid:{display:false},ticks:{color:'#64748b',font:{size:10}}},
-        y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#64748b',callback:v=>fmt(v),font:{size:10}}}
-      }
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>' '+fmt(ctx.raw)}}},
+      scales:{x:{grid:{display:false},ticks:{color:'#64748b',font:{size:9}}},y:{grid:{color:'rgba(255,255,255,0.05)'},ticks:{color:'#64748b',callback:v=>fmt(v),font:{size:9}}}}
     }
   });
 }
 
+// ── List ──
 function renderList() {
-  const el = document.getElementById('entries-list');
-  document.getElementById('list-count').textContent = entries.length + ' entrée(s)';
-  if (!entries.length) {
-    el.innerHTML = '<div class="empty-state"><div style="font-size:2rem;">📋</div><p>Aucune entrée.<br>Ajoute ton premier contrat.</p></div>';
-    return;
-  }
-  el.innerHTML = [...entries].sort((a,b)=>new Date(b.date)-new Date(a.date)).map(e => {
-    const val = getVal(e);
-    const subVal = getSubVal(e);
-    const net = val - subVal;
-    return `<div class="entry-card">
+  const el=document.getElementById('entries-list');
+  document.getElementById('list-count').textContent=entries.length+' entrée(s)';
+  if(!entries.length){el.innerHTML='<div class="empty-state"><div style="font-size:2rem;">📋</div><p>Aucune entrée.</p></div>';return;}
+  el.innerHTML=[...entries].sort((a,b)=>new Date(b.date)-new Date(a.date)).map(e=>{
+    const val=getVal(e),subVal=getSubVal(e),net=val-subVal,name=getClientName(e);
+    return`<div class="entry-card">
       <div class="entry-top">
-        <div class="entry-icon ${e.status}">${initials(e.client)}</div>
+        <div class="entry-icon ${e.status}">${initials(name)}</div>
         <div class="entry-body">
-          <div class="entry-client">${e.client}</div>
+          <div class="entry-client">${name}</div>
           <div class="entry-meta">${new Date(e.date).toLocaleDateString('fr-FR')}${e.desc?' · '+e.desc:''}</div>
         </div>
         <div class="entry-right">
           <div class="entry-amount">${fmt(val)}</div>
-          ${subVal>0?`<div class="entry-sub">- ${fmt(subVal)} ST</div><div class="entry-net">= ${fmt(net)} net</div>`:''}
+          ${subVal>0?`<div class="entry-sub">- ${fmt(subVal)} ST</div><div class="entry-net">= ${fmt(net)}</div>`:''}
           <div class="entry-badge badge-${e.status}">${e.status==='signed'?'Signé':'Option'}</div>
         </div>
       </div>
       <div class="entry-actions">
         <button class="btn-paid" onclick="markPaid(${e.id})">✓ Payé</button>
         <button class="btn-edit" onclick="openEditModal(${e.id})">✏️ Modifier</button>
-        <button class="btn-del" onclick="deleteEntry(${e.id})">🗑 Supprimer</button>
+        <button class="btn-del" onclick="deleteEntry(${e.id})">🗑 Suppr.</button>
       </div>
     </div>`;
   }).join('');
 }
 
-function renderAll() { updateDashboard(); renderList(); }
+// ── Clients ──
+function renderClients() {
+  const el=document.getElementById('clients-list');
+  document.getElementById('clients-count').textContent=clients.length+' client(s)';
+  if(!clients.length){el.innerHTML='<div class="empty-state"><div style="font-size:2rem;">👥</div><p>Aucun client.<br>Ajoute ton premier client.</p></div>';return;}
+  el.innerHTML=clients.map(c=>`
+    <div class="client-card">
+      <div class="client-icon">${initials(c.name)}</div>
+      <div class="client-body">
+        <div class="client-name">${c.name}</div>
+        <div class="client-meta">${c.amount?fmt(c.amount)+' HT · ':''} TVA ${c.tva}%${c.note?' · '+c.note:''}</div>
+      </div>
+      <div class="client-actions">
+        <button class="btn-client-edit" onclick="openClientModal(${c.id})">✏️</button>
+        <button class="btn-client-del" onclick="deleteClient(${c.id})">🗑</button>
+      </div>
+    </div>`).join('');
+}
 
-document.getElementById('f-date').valueAsDate = new Date();
-document.getElementById('year-display').textContent = currentYear;
-loadConfig(); loadLocal(); renderAll();
-if (apiUrl && apiSecret) pullFromNas();
-
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./sw.js").then(reg => {
-    reg.addEventListener("updatefound", () => {
-      const nw = reg.installing;
-      nw.addEventListener("statechange", () => {
-        if (nw.state === "activated") window.location.reload();
-      });
-    });
-    setInterval(() => reg.update(), 30000);
+// ── Stats ──
+function renderStats() {
+  const yr=entries.filter(e=>new Date(e.date).getFullYear()===currentYear);
+  const filtered=statsMode==='prev'?yr:yr.filter(e=>e.status==='signed');
+  const byClient={};
+  filtered.forEach(e=>{
+    const name=getClientName(e);
+    if(!byClient[name]) byClient[name]=0;
+    byClient[name]+=getVal(e);
   });
-  navigator.serviceWorker.addEventListener("message", e => {
-    if (e.data && e.data.type === "NEW_VERSION")
-      document.getElementById("app-version").textContent = "v" + e.data.version;
+  const sorted=Object.entries(byClient).sort((a,b)=>b[1]-a[1]);
+  const total=sorted.reduce((a,x)=>a+x[1],0);
+  const labels=sorted.map(x=>x[0]);
+  const data=sorted.map(x=>x[1]);
+  const colors=sorted.map((_,i)=>PIE_COLORS[i%PIE_COLORS.length]);
+
+  if(pieChart) pieChart.destroy();
+  pieChart=new Chart(document.getElementById('pieChart'),{
+    type:'doughnut',
+    data:{labels,datasets:[{data,backgroundColor:colors,borderColor:'#0f172a',borderWidth:2,hoverOffset:6}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.label} : ${fmt(ctx.raw)} (${total?Math.round(ctx.raw/total*100):0}%)`}}}
+    }
+  });
+
+  const tbody=document.getElementById('stats-table-body');
+  if(!sorted.length){tbody.innerHTML='<tr><td colspan="3" style="text-align:center;color:var(--text3);padding:16px;">Aucune donnée</td></tr>';return;}
+  tbody.innerHTML=sorted.map((x,i)=>`
+    <tr>
+      <td><span class="client-dot" style="background:${colors[i]};"></span>${x[0]}</td>
+      <td style="font-weight:600;">${fmt(x[1])}</td>
+      <td style="color:var(--text3);">${total?Math.round(x[1]/total*100):0} %</td>
+    </tr>`).join('');
+}
+
+function renderAll() { updateDashboard(); renderList(); renderClients(); }
+
+// ── Init ──
+document.getElementById('f-date').valueAsDate=new Date();
+document.getElementById('year-display').textContent=currentYear;
+loadConfig(); loadLocal(); refreshClientSelects(); renderAll();
+if(apiUrl&&apiSecret) pullFromNas();
+
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.register("./sw.js").then(reg=>{
+    reg.addEventListener("updatefound",()=>{
+      const nw=reg.installing;
+      nw.addEventListener("statechange",()=>{ if(nw.state==="activated") window.location.reload(); });
+    });
+    setInterval(()=>reg.update(),30000);
+  });
+  navigator.serviceWorker.addEventListener("message",e=>{
+    if(e.data&&e.data.type==="NEW_VERSION") document.getElementById("app-version").textContent="v"+e.data.version;
   });
 }
 </script>

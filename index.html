@@ -46,7 +46,7 @@
     .mode-pill button.active { background: var(--blue); color: #fff; }
 
     /* Metrics - 5 cases */
-    .metrics { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; padding: 8px 20px; }
+    .metrics { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; padding: 8px 20px; }
     .metric { background: var(--bg2); border-radius: 8px; padding: 8px 6px; border: 0.5px solid var(--border); text-align: center; }
     .metric-label { font-size: 8px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px; line-height: 1.2; }
     .metric-value { font-size: 12px; font-weight: 700; }
@@ -113,6 +113,7 @@
     .cal-entry.option { background: var(--amber-bg); color: var(--amber-light); }
     .cal-entry.paye { background: var(--emerald-bg); color: var(--emerald-light); }
     .cal-more { font-size: 8px; color: var(--text3); }
+    .cal-st-dot { position: absolute; top: 3px; right: 3px; width: 5px; height: 5px; border-radius: 50%; background: #ef4444; }
     .cal-legend { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
     .cal-legend-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--text2); }
     .cal-legend-dot { width: 8px; height: 8px; border-radius: 2px; }
@@ -198,7 +199,7 @@
   <header>
     <div class="header-top">
       <div style="display:flex;align-items:center;gap:10px;">
-        <div class="logo">factu<span class="accent">.</span>app <span class="ver" id="app-version">v1.4.0</span></div>
+        <div class="logo">factu<span class="accent">.</span>app <span class="ver" id="app-version">v1.4.1</span></div>
         <div class="sync-status">
           <div class="sync-dot" id="sync-dot"></div>
           <span id="sync-label">Non connecté</span>
@@ -223,6 +224,8 @@
     <div class="metric"><div class="metric-label">Validé</div><div class="metric-value blue" id="m-valide">0 €</div></div>
     <div class="metric"><div class="metric-label">Option</div><div class="metric-value amber" id="m-option">0 €</div></div>
     <div class="metric"><div class="metric-label">Payé (CA)</div><div class="metric-value emerald" id="m-paye">0 €</div></div>
+    <div class="metric"><div class="metric-label">ST Validé</div><div class="metric-value red" id="m-st-valide">0 €</div></div>
+    <div class="metric"><div class="metric-label">ST Option</div><div class="metric-value red" id="m-st-option">0 €</div></div>
     <div class="metric"><div class="metric-label">Net validé</div><div class="metric-value teal" id="m-net-valide">0 €</div></div>
     <div class="metric"><div class="metric-label">Net + opt.</div><div class="metric-value green" id="m-net-opt">0 €</div></div>
   </div>
@@ -528,7 +531,8 @@ function renderCalendar(){
     const isSel=selectedDay===dateStr;
     const dayE=entries.filter(e=>e.date===dateStr&&(!fc||e.clientId==fc));
     let dh=`<div class="cal-day${isToday?' today':''}${isSel?' selected':''}" onclick="selectDay('${dateStr}')">`;
-    dh+=`<div class="cal-day-num">${d}</div>`;
+    const hasST=dayE.some(e=>getSubVal(e)>0);
+    dh+=`<div class="cal-day-num">${d}</div>${hasST?'<div class="cal-st-dot"></div>':''}`;
     dayE.slice(0,2).forEach(e=>{dh+=`<div class="cal-entry ${e.status}">${getClientName(e)}</div>`;});
     if(dayE.length>2)dh+=`<div class="cal-more">+${dayE.length-2}</div>`;
     dh+='</div>';html+=dh;
@@ -746,6 +750,8 @@ function updateDashboard(){
   const stO=option.reduce((a,e)=>a+getSubVal(e),0);
   const netV=sumV-stV;
   const netOpt=sumV+sumO-stV-stO;
+  document.getElementById('m-st-valide').textContent=fmt(stV);
+  document.getElementById('m-st-option').textContent=fmt(stO);
   document.getElementById('m-valide').textContent=fmt(sumV);
   document.getElementById('m-option').textContent=fmt(sumO);
   document.getElementById('m-paye').textContent=fmt(sumP);

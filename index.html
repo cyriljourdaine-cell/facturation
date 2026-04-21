@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Facturation"/>
+  <meta name="theme-color" content="#0f172a"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="apple-touch-icon" href="icon-192.png"/>
+  <title>Facturation</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f172a;
+      --bg2: #1e293b;
+      --bg3: #334155;
+      --border: rgba(255,255,255,0.08);
+      --border2: rgba(255,255,255,0.15);
+      --text: #f1f5f9;
+      --text2: #94a3b8;
+      --text3: #64748b;
+      --blue: #3b82f6;
+      --blue-light: #93c5fd;
+      --blue-bg: rgba(59,130,246,0.12);
+      --amber: #f59e0b;
+      --amber-light: #fcd34d;
+      --amber-bg: rgba(245,158,11,0.12);
+      --green: #10b981;
+      --green-bg: rgba(16,185,129,0.12);
+      --radius: 10px;
+      --radius-lg: 16px;
+    }
+
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; }
+
+    /* ── Layout ── */
+    .app { display: flex; flex-direction: column; height: 100dvh; max-width: 680px; margin: 0 auto; }
+
+    /* ── Header ── */
+    header { padding: 16px 20px 0; }
+    .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .logo { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
+    .logo span { color: var(--blue); }
+    .year-nav { display: flex; align-items: center; gap: 10px; }
+    .year-btn { background: var(--bg2); border: 0.5px solid var(--border2); color: var(--text2); border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: 14px; }
+    .year-btn:hover { background: var(--bg3); }
+    #year-display { font-size: 15px; font-weight: 600; min-width: 40px; text-align: center; }
+    .mode-pill { display: flex; background: var(--bg2); border-radius: 20px; padding: 2px; gap: 2px; border: 0.5px solid var(--border); }
+    .mode-pill button { padding: 4px 14px; border: none; border-radius: 16px; font-size: 12px; font-weight: 600; cursor: pointer; background: transparent; color: var(--text2); letter-spacing: 0.04em; }
+    .mode-pill button.active { background: var(--blue); color: #fff; }
+
+    /* ── Metrics ── */
+    .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 14px 20px; }
+    .metric { background: var(--bg2); border-radius: var(--radius); padding: 12px 14px; border: 0.5px solid var(--border); }
+    .metric-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .metric-value { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
+    .metric-value.blue { color: var(--blue-light); }
+    .metric-value.amber { color: var(--amber-light); }
+    .metric-value.green { color: #6ee7b7; }
+
+    /* ── Chart ── */
+    .chart-section { padding: 0 20px 10px; }
+    .chart-legend { display: flex; gap: 14px; margin-bottom: 8px; }
+    .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text2); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+    .chart-wrap { position: relative; height: 180px; }
+
+    /* ── Tabs ── */
+    .tabs { display: flex; border-top: 0.5px solid var(--border); background: var(--bg); }
+    .tab { flex: 1; padding: 12px 8px 10px; background: none; border: none; color: var(--text3); cursor: pointer; font-size: 11px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+    .tab svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+    .tab.active { color: var(--blue); }
+
+    /* ── Panels ── */
+    .panels { flex: 1; overflow: hidden; }
+    .panel { display: none; height: 100%; overflow-y: auto; padding: 16px 20px; }
+    .panel.active { display: block; }
+
+    /* ── Form ── */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.05em; }
+    input, select { background: var(--bg2); border: 0.5px solid var(--border2); color: var(--text); border-radius: var(--radius); padding: 0 12px; height: 42px; font-size: 15px; -webkit-appearance: none; }
+    input::placeholder { color: var(--text3); }
+    input:focus, select:focus { outline: none; border-color: var(--blue); }
+    select option { background: var(--bg2); }
+
+    .status-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .status-btn { height: 48px; border-radius: var(--radius); border: 1.5px solid var(--border2); background: var(--bg2); color: var(--text2); font-size: 14px; font-weight: 600; cursor: pointer; }
+    .status-btn.sel-signed { border-color: var(--blue); background: var(--blue-bg); color: var(--blue-light); }
+    .status-btn.sel-option { border-color: var(--amber); background: var(--amber-bg); color: var(--amber-light); }
+
+    .btn-submit { width: 100%; height: 50px; background: var(--blue); color: #fff; border: none; border-radius: var(--radius); font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .btn-submit:active { opacity: 0.85; transform: scale(0.99); }
+    .msg { text-align: center; font-size: 13px; min-height: 20px; margin-top: 8px; }
+    .msg.ok { color: var(--green); }
+    .msg.err { color: #f87171; }
+
+    /* ── List ── */
+    .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .list-count { font-size: 13px; color: var(--text3); }
+    .entry-card { background: var(--bg2); border-radius: var(--radius); border: 0.5px solid var(--border); padding: 14px; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 12px; }
+    .entry-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+    .entry-icon.signed { background: var(--blue-bg); color: var(--blue-light); }
+    .entry-icon.option { background: var(--amber-bg); color: var(--amber-light); }
+    .entry-body { flex: 1; min-width: 0; }
+    .entry-client { font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .entry-meta { font-size: 12px; color: var(--text3); margin-top: 2px; }
+    .entry-right { text-align: right; flex-shrink: 0; }
+    .entry-amount { font-weight: 700; font-size: 16px; }
+    .entry-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-top: 4px; }
+    .badge-signed { background: var(--blue-bg); color: var(--blue-light); }
+    .badge-option { background: var(--amber-bg); color: var(--amber-light); }
+    .btn-del { background: none; border: none; color: var(--text3); cursor: pointer; padding: 4px; font-size: 16px; margin-left: 6px; border-radius: 6px; }
+    .btn-del:hover { color: #f87171; background: rgba(248,113,113,0.1); }
+    .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text3); }
+    .empty-state p { margin-top: 8px; font-size: 14px; }
+
+    /* ── Settings ── */
+    .settings-section { margin-bottom: 24px; }
+    .settings-title { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .settings-card { background: var(--bg2); border-radius: var(--radius); border: 0.5px solid var(--border); padding: 16px; }
+    .settings-card p { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 10px; }
+    .settings-card code { background: var(--bg3); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: var(--text); }
+    .btn-file { display: inline-block; background: var(--bg3); border: 0.5px solid var(--border2); color: var(--text); border-radius: var(--radius); padding: 10px 16px; font-size: 14px; cursor: pointer; }
+    .btn-export { width: 100%; height: 44px; background: var(--bg3); border: 0.5px solid var(--border2); color: var(--text); border-radius: var(--radius); font-size: 14px; cursor: pointer; margin-top: 8px; }
+    .file-status { font-size: 13px; color: var(--text3); margin-top: 8px; }
+    .file-status.ok { color: var(--green); }
+    .install-steps { list-style: none; counter-reset: steps; }
+    .install-steps li { counter-increment: steps; display: flex; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--border); font-size: 14px; color: var(--text2); }
+    .install-steps li:last-child { border: none; }
+    .install-steps li::before { content: counter(steps); width: 22px; height: 22px; background: var(--blue-bg); color: var(--blue-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    @media (max-width: 400px) {
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .metrics .metric:last-child { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <!-- HEADER -->
+  <header>
+    <div class="header-top">
+      <div class="logo">factu<span>.</span>app</div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="year-nav">
+          <button class="year-btn" onclick="changeYear(-1)">←</button>
+          <span id="year-display">2025</span>
+          <button class="year-btn" onclick="changeYear(1)">→</button>
+        </div>
+        <div class="mode-pill">
+          <button class="active" onclick="setMode('HT',this)">HT</button>
+          <button onclick="setMode('TTC',this)">TTC</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- METRICS -->
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">Signés</div>
+      <div class="metric-value blue" id="m-signed">0 €</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Options</div>
+      <div class="metric-value amber" id="m-option">0 €</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Total</div>
+      <div class="metric-value green" id="m-total">0 €</div>
+    </div>
+  </div>
+
+  <!-- CHART -->
+  <div class="chart-section">
+    <div class="chart-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;"></div>Signés</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>Options</div>
+    </div>
+    <div class="chart-wrap">
+      <canvas id="mainChart" role="img" aria-label="Graphique mensuel des entrées d'argent">Données mensuelles de facturation.</canvas>
+    </div>
+  </div>
+
+  <!-- PANELS -->
+  <div class="panels">
+    <!-- Saisie -->
+    <div class="panel active" id="panel-add">
+      <div class="form-row">
+        <div class="form-group full">
+          <label>Client</label>
+          <input type="text" id="f-client" placeholder="Nom du client ou société" autocomplete="organization"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date de prestation</label>
+          <input type="date" id="f-date"/>
+        </div>
+        <div class="form-group">
+          <label>Montant HT (€)</label>
+          <input type="number" id="f-ht" placeholder="0.00" step="0.01" min="0" inputmode="decimal"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>TVA</label>
+          <select id="f-tva">
+            <option value="20">20 % — standard</option>
+            <option value="10">10 % — réduit</option>
+            <option value="5.5">5,5 % — réduit</option>
+            <option value="2.1">2,1 % — super réduit</option>
+            <option value="0">0 % — exonéré</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input type="text" id="f-desc" placeholder="Optionnel"/>
+        </div>
+      </div>
+      <div class="status-row">
+        <button class="status-btn sel-signed" id="btn-signed" onclick="selectStatus('signed')">✓ Contrat signé</button>
+        <button class="status-btn" id="btn-option" onclick="selectStatus('option')">◇ En option</button>
+      </div>
+      <button class="btn-submit" onclick="addEntry()">Ajouter cette entrée</button>
+      <div class="msg" id="form-msg"></div>
+    </div>
+
+    <!-- Liste -->
+    <div class="panel" id="panel-list">
+      <div class="list-header">
+        <span class="list-count" id="list-count">0 entrée(s)</span>
+        <div class="mode-pill">
+          <button class="active" onclick="setMode('HT',this)">HT</button>
+          <button onclick="setMode('TTC',this)">TTC</button>
+        </div>
+      </div>
+      <div id="entries-list"></div>
+    </div>
+
+    <!-- Paramètres -->
+    <div class="panel" id="panel-settings">
+      <div class="settings-section">
+        <div class="settings-title">Synchronisation (Google Drive / iCloud)</div>
+        <div class="settings-card">
+          <p>Pour synchroniser entre Windows et iPhone, place le fichier <code>facturation.json</code> dans ton <strong>Google Drive</strong> ou <strong>iCloud Drive</strong>. L'app lit et écrit ce fichier à chaque fois.</p>
+          <label class="btn-file">
+            📂 Ouvrir un fichier JSON
+            <input type="file" id="file-input" accept=".json" style="display:none" onchange="loadFromFile(this)"/>
+          </label>
+          <button class="btn-export" onclick="exportToFile()">⬇ Exporter / Sauvegarder le fichier JSON</button>
+          <div class="file-status" id="file-status"></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-title">Installer sur iPhone (Safari)</div>
+        <div class="settings-card">
+          <ul class="install-steps">
+            <li>Ouvre cette page dans Safari sur ton iPhone</li>
+            <li>Appuie sur le bouton Partage (rectangle avec flèche vers le haut)</li>
+            <li>Appuie sur « Sur l'écran d'accueil »</li>
+            <li>L'icône apparaît comme une vraie app</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-title">Installer sur Windows (Chrome / Edge)</div>
+        <div class="settings-card">
+          <ul class="install-steps">
+            <li>Ouvre cette page dans Chrome ou Edge</li>
+            <li>Clique sur l'icône d'installation dans la barre d'adresse (ou menu → Installer)</li>
+            <li>L'app apparaît dans le menu Démarrer et le bureau</li>
+            <li>Elle fonctionne même hors-ligne</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-title">Données</div>
+        <div class="settings-card">
+          <p>Toutes tes données sont stockées localement sur cet appareil. Exporte régulièrement vers ton Drive pour les synchroniser.</p>
+          <button class="btn-export" onclick="if(confirm('Effacer toutes les données ?')){entries=[];save();renderAll();}">🗑 Effacer toutes les données</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" id="tab-add" onclick="showPanel('add')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      Nouveau
+    </button>
+    <button class="tab" id="tab-list" onclick="showPanel('list')">
+      <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      Entrées
+    </button>
+    <button class="tab" id="tab-settings" onclick="showPanel('settings')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Réglages
+    </button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ── State ──
+let entries = [];
+let mode = 'HT';
+let currentYear = new Date().getFullYear();
+let selectedStatus = 'signed';
+let chart = null;
+
+const MONTHS = ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+const KEY = 'facturation_v2';
+
+// ── Persistence ──
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(entries)); } catch(e) {}
+}
+
+function load() {
+  try {
+    const d = localStorage.getItem(KEY);
+    if (d) entries = JSON.parse(d);
+  } catch(e) {}
+}
+
+// ── File I/O (sync simulation via JSON file) ──
+function exportToFile() {
+  const blob = new Blob([JSON.stringify({version:2, entries}, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'facturation.json';
+  a.click();
+  document.getElementById('file-status').textContent = '✓ Fichier exporté — place-le dans ton Google Drive ou iCloud Drive';
+  document.getElementById('file-status').className = 'file-status ok';
+}
+
+function loadFromFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.entries) entries = data.entries;
+      else if (Array.isArray(data)) entries = data;
+      save();
+      renderAll();
+      document.getElementById('file-status').textContent = '✓ ' + entries.length + ' entrée(s) importée(s) depuis ' + file.name;
+      document.getElementById('file-status').className = 'file-status ok';
+    } catch(err) {
+      document.getElementById('file-status').textContent = '✗ Fichier invalide';
+      document.getElementById('file-status').className = 'file-status';
+    }
+  };
+  reader.readAsText(file);
+  input.value = '';
+}
+
+// ── Navigation ──
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  if (id === 'list') renderList();
+}
+
+function changeYear(d) {
+  currentYear += d;
+  document.getElementById('year-display').textContent = currentYear;
+  updateDashboard();
+}
+
+function setMode(m, el) {
+  mode = m;
+  document.querySelectorAll('.mode-pill button').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.mode-pill button').forEach(b => { if(b.textContent===m) b.classList.add('active'); });
+  renderAll();
+}
+
+// ── Status selection ──
+function selectStatus(s) {
+  selectedStatus = s;
+  const bs = document.getElementById('btn-signed');
+  const bo = document.getElementById('btn-option');
+  bs.className = 'status-btn' + (s==='signed' ? ' sel-signed' : '');
+  bo.className = 'status-btn' + (s==='option' ? ' sel-option' : '');
+}
+
+// ── Add entry ──
+function addEntry() {
+  const client = document.getElementById('f-client').value.trim();
+  const date = document.getElementById('f-date').value;
+  const ht = parseFloat(document.getElementById('f-ht').value);
+  const tva = parseFloat(document.getElementById('f-tva').value);
+  const desc = document.getElementById('f-desc').value.trim();
+  const msg = document.getElementById('form-msg');
+
+  if (!client || !date || isNaN(ht) || ht <= 0) {
+    msg.className = 'msg err';
+    msg.textContent = 'Renseigne le client, la date et le montant.';
+    return;
+  }
+
+  entries.push({
+    id: Date.now(),
+    client, date,
+    ht: Math.round(ht * 100) / 100,
+    tva,
+    ttc: Math.round(ht * (1 + tva / 100) * 100) / 100,
+    status: selectedStatus,
+    desc
+  });
+  save();
+  renderAll();
+
+  document.getElementById('f-client').value = '';
+  document.getElementById('f-ht').value = '';
+  document.getElementById('f-desc').value = '';
+  msg.className = 'msg ok';
+  msg.textContent = '✓ Entrée ajoutée avec succès !';
+  setTimeout(() => { msg.textContent = ''; }, 2500);
+}
+
+// ── Delete ──
+function deleteEntry(id) {
+  if (!confirm('Supprimer cette entrée ?')) return;
+  entries = entries.filter(e => e.id !== id);
+  save();
+  renderAll();
+}
+
+// ── Helpers ──
+function fmt(v) {
+  return new Intl.NumberFormat('fr-FR', {style:'currency', currency:'EUR', maximumFractionDigits:0}).format(v);
+}
+function getVal(e) { return mode === 'HT' ? e.ht : e.ttc; }
+function initials(name) {
+  return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+}
+
+// ── Dashboard ──
+function updateDashboard() {
+  const yr = entries.filter(e => new Date(e.date).getFullYear() === currentYear);
+  const signed = yr.filter(e => e.status === 'signed');
+  const option = yr.filter(e => e.status === 'option');
+  const sumS = signed.reduce((a, e) => a + getVal(e), 0);
+  const sumO = option.reduce((a, e) => a + getVal(e), 0);
+
+  document.getElementById('m-signed').textContent = fmt(sumS);
+  document.getElementById('m-option').textContent = fmt(sumO);
+  document.getElementById('m-total').textContent = fmt(sumS + sumO);
+
+  const dataS = Array(12).fill(0);
+  const dataO = Array(12).fill(0);
+  yr.forEach(e => {
+    const m = new Date(e.date).getMonth();
+    if (e.status === 'signed') dataS[m] += getVal(e);
+    else dataO[m] += getVal(e);
+  });
+
+  if (chart) chart.destroy();
+  chart = new Chart(document.getElementById('mainChart'), {
+    type: 'bar',
+    data: {
+      labels: MONTHS,
+      datasets: [
+        { label: 'Signés', data: dataS, backgroundColor: '#3b82f6', borderRadius: 4, borderSkipped: false },
+        { label: 'Options', data: dataO, backgroundColor: '#f59e0b', borderRadius: 4, borderSkipped: false }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ' ' + fmt(ctx.raw) } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10 } } },
+        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#64748b', callback: v => fmt(v), font: { size: 10 } } }
+      }
+    }
+  });
+}
+
+// ── List ──
+function renderList() {
+  const el = document.getElementById('entries-list');
+  document.getElementById('list-count').textContent = entries.length + ' entrée(s)';
+  if (!entries.length) {
+    el.innerHTML = '<div class="empty-state"><div style="font-size:2rem;">📋</div><p>Aucune entrée pour l\'instant.<br>Ajoute ton premier contrat.</p></div>';
+    return;
+  }
+  const sorted = [...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
+  el.innerHTML = sorted.map(e => `
+    <div class="entry-card">
+      <div class="entry-icon ${e.status}">${initials(e.client)}</div>
+      <div class="entry-body">
+        <div class="entry-client">${e.client}</div>
+        <div class="entry-meta">${new Date(e.date).toLocaleDateString('fr-FR')}${e.desc ? ' · ' + e.desc : ''}</div>
+      </div>
+      <div class="entry-right">
+        <div class="entry-amount">${fmt(getVal(e))}</div>
+        <div class="entry-badge badge-${e.status}">${e.status === 'signed' ? 'Signé' : 'Option'}</div>
+      </div>
+      <button class="btn-del" onclick="deleteEntry(${e.id})" title="Supprimer">✕</button>
+    </div>
+  `).join('');
+}
+
+// ── All ──
+function renderAll() {
+  updateDashboard();
+  renderList();
+}
+
+// ── Init ──
+document.getElementById('f-date').valueAsDate = new Date();
+document.getElementById('year-display').textContent = currentYear;
+load();
+renderAll();
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("./sw.js");}</script>
+</body>
+</html>

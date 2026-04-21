@@ -535,7 +535,7 @@ function prefillFromClient() {
   if (!c) return;
   document.getElementById('f-client-name').value = '';
   if (c.amount) document.getElementById('f-ht').value = c.amount;
-  document.getElementById('f-tva').value = c.tva || 20;
+  document.getElementById('f-tva').value = (c.tva !== undefined ? c.tva : 20);
 }
 
 function prefillEditFromClient() {
@@ -544,7 +544,7 @@ function prefillEditFromClient() {
   const c = clients.find(x => x.id == id);
   if (!c) return;
   if (c.amount) document.getElementById('e-ht').value = c.amount;
-  document.getElementById('e-tva').value = c.tva || 20;
+  document.getElementById('e-tva').value = (c.tva !== undefined ? c.tva : 20);
 }
 
 function refreshClientSelects() {
@@ -646,7 +646,7 @@ function openClientModal(id) {
     const c = clients.find(x=>x.id===id); if(!c) return;
     document.getElementById('c-name').value = c.name;
     document.getElementById('c-amount').value = c.amount || '';
-    document.getElementById('c-tva').value = c.tva || 20;
+    document.getElementById('c-tva').value = (c.tva !== undefined ? c.tva : 20);
     document.getElementById('c-note').value = c.note || '';
   } else {
     document.getElementById('c-name').value='';
@@ -661,7 +661,7 @@ async function saveClient() {
   const name = document.getElementById('c-name').value.trim();
   if(!name) return;
   const data = { name, amount:parseFloat(document.getElementById('c-amount').value)||0,
-    tva:parseFloat(document.getElementById('c-tva').value)||20,
+    tva:parseFloat(document.getElementById('c-tva').value),
     note:document.getElementById('c-note').value.trim() };
   if (editClientId) {
     const idx=clients.findIndex(x=>x.id===editClientId);

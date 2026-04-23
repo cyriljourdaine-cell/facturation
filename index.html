@@ -209,7 +209,7 @@
   <header>
     <div class="header-top">
       <div style="display:flex;align-items:center;gap:10px;">
-        <div class="logo">factu<span class="accent">.</span>app <span class="ver" id="app-version">v1.6.7</span></div>
+        <div class="logo">factu<span class="accent">.</span>app <span class="ver" id="app-version">v1.6.8</span></div>
         <div class="sync-status">
           <div class="sync-dot" id="sync-dot"></div>
           <span id="sync-label">Non connecté</span>
@@ -611,7 +611,7 @@ function setDefaultPeriod(type){
   if(type==='calendar'){
     periodMode='calendar'; currentYear=year;
     savePeriodConfig('calendar','01-01','12-31');
-    document.getElementById('def-custom-row').style.display='none';
+    var _dcr=document.getElementById('def-custom-row');if(_dcr)_dcr.style.display='none';
     document.getElementById('def-period-status').textContent='✓ Année civile enregistrée (Jan → Déc)';
   } else if(type==='fiscal'){
     // default fiscal Oct->Sep
@@ -622,10 +622,10 @@ function setDefaultPeriod(type){
     periodEnd=new Date(startYear+1,8,30,23,59,59);
     periodMode='custom';
     savePeriodConfig('fiscal','10-01','09-30');
-    document.getElementById('def-custom-row').style.display='none';
+    var _dcr=document.getElementById('def-custom-row');if(_dcr)_dcr.style.display='none';
     document.getElementById('def-period-status').textContent='✓ Année fiscale enregistrée (Oct → Sep)';
   } else {
-    document.getElementById('def-custom-row').style.display='grid';
+    var _dcr2=document.getElementById('def-custom-row');if(_dcr2)_dcr2.style.display='grid';
     document.getElementById('def-period-status').textContent='';
     return;
   }

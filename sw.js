@@ -1,4 +1,4 @@
-const VERSION = '1.7.9';
+const VERSION = '1.8.0';
 const CACHE = 'facturation-' + VERSION;
 const ASSETS = ['./', './index.html', './manifest.json'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())); });
